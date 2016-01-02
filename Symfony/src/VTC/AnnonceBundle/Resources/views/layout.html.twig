@@ -1,0 +1,37 @@
+{# src/OC/PlatformBundle/Resources/views/layout.html.twig #}
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+  Entre Vtc - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+  {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+  <p class="text-center">
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
+
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">ADMIN</a>
+      {% endif %}
+
+
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">Mon compte</a>
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">Mon compte</a>
+        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
+    </a>
+    <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
+    </a>
+      </p>
+    </div>
+
+  <hr>
+
+  {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+  {% block ocplatform_body %}
+  {% endblock %}
+
+{% endblock %}

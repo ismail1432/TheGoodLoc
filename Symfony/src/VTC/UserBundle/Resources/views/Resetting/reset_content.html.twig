@@ -1,0 +1,17 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<p> <div class="jumbotron">
+      <h1 class="text-center">GOOD LOC VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+  </div>
+  <div class="text-center">
+
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+    </div>
+{{ form_end(form) }}
+</div>

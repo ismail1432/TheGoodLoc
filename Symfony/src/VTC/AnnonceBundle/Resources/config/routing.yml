@@ -1,0 +1,39 @@
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+vtc_platform_home:
+    path:      /{page}
+    defaults: { _controller: VTCAnnonceBundle:Advert:index, page: 1 }
+    requirements:
+        page: \d*
+
+vtc_platform_view:
+    path:      /advert/{id}
+    defaults:  { _controller: VTCAnnonceBundle:Advert:view }
+    requirements:
+        id: \d+
+
+vtc_platform_searchresult:
+    path:      /searchresult
+    defaults:  { _controller: VTCAnnonceBundle:Advert:mysearch }
+    requirements:
+        id: \d+
+
+vtc_platform_add:
+    path:      /add
+    defaults:  { _controller: VTCAnnonceBundle:Advert:add }
+
+vtc_platform_edit:
+    path:      /edit/{id}
+    defaults:  { _controller: VTCAnnonceBundle:Advert:edit }
+    requirements:
+        id: \d+
+
+vtc_platform_delete:
+    path:      /delete/{id}
+    defaults:  { _controller: VTCAnnonceBundle:Advert:delete }
+    requirements:
+        id: \d+
+
+vtc_platform_admin:
+    path:       /admin
+    defaults: 

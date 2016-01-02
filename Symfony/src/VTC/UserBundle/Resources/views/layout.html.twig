@@ -1,0 +1,37 @@
+<head>
+        <meta charset="UTF-8" />
+        {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  {% endblock %}
+    </head>
+        <body>
+
+        <div class="container">
+            <div class="text-center">
+        
+   
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+
+            	 <div class="alert alert-{{ type }}">
+
+
+            	 	<ul>
+                {% for message in messages %}
+                   <ol>
+                        {{ message }}
+                    </ol>
+                </ul>
+                   </div>
+                {% endfor %}
+                 </div>
+            {% endfor %}
+        {% endif %}
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        
+    </div>
+        </div>
+    </body>
+</html>

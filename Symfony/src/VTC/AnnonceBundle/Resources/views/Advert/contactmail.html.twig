@@ -1,0 +1,58 @@
+<div class="container">
+
+<h4 class="section-heading">Envoyer un message pour cette annonce: </h4></br >
+  
+ <form class="form-horizontal" action="{{ path('vtc_platform_view', {'id': advert.id}) }}" method="post">
+<div class="form-group">
+
+<div class="text-center">
+<div class="col-sm-6">
+  <div class="input-group">
+
+          <span class="input-group-addon">
+          <span class="glyphicon glyphicon-user"></span>
+          </span>
+          
+      <input type="text" class="form-control" placeholder="Votre nom"  name="name" id="name" maxlength="50" class="name" />
+          </div>
+ </div>
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-sm-6">
+ <div class="input-group">
+<span class="input-group-addon">
+ <span class="glyphicon glyphicon-phone"></span>
+ </span>
+ <input type="text" class="form-control" placeholder="Votre telephone" name="phone" id="phone"  class="phone"/>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-sm-6">
+ <div class="input-group">
+  <span class="input-group-addon">
+ <span class="glyphicon glyphicon-envelope"></span>
+   </span>
+ <input type="text" class="form-control" placeholder="Votre adresse email"  name="mail" id="mail" maxlength="80" class="mail" value="" required/>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<div class="col-sm-8">
+<div class="input-group">
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-pencil"></span>
+</span>
+<textarea type="text" class="form-control" placeholder="Ecrivez votre message" name="msg" id="msg"  class="msg" value="" rows="6" required/></textarea>
+  </div>
+  </div>
+</div>
+<button type="submit" class="btn btn-primary btn-md" name="valider">envoi</button>
+                                   
+</form>
+</div>
+</div>

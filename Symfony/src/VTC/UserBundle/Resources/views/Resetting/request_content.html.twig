@@ -1,0 +1,24 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<p> <div class="jumbotron">
+      <h1 class="text-center">GOOD LOC VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+  </div>
+  <div class="text-center">
+
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    <div>
+        {% if invalid_username is defined %}
+            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+        {% endif %}
+        <label for="username">{{ 'resetting.request.username'|trans }}</label>
+        <input type="text" id="username" name="username" required="required" />
+    </div>
+    <div>
+        <button type="submit" id="_submit" name="_submit" class="btn btn-success" value="value="{{ 'resetting.request.submit'|trans }} />Reinitialiser le mot de passe</button>
+    </div>
+</form>
+<a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_home') }}">Accueil</a>
+</div>

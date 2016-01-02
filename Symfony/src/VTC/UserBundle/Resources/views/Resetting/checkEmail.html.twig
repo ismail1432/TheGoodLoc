@@ -1,0 +1,19 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+	<p> <div class="jumbotron">
+      <h1 class="text-center">GOOD LOC VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+  </div>
+  <div class="text-center">
+<p>
+<div class="alert alert-info">
+{{ 'resetting.check_email'|trans({'%email%': email}) }}
+</p>
+</div>
+{% endblock %}

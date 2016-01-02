@@ -1,0 +1,70 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "VTCAnnonceBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+{% block ocplatform_body %}
+
+<div class"row">
+<div id="search" class="col-md-12">
+  
+
+
+</div>
+</div>
+{% if listAdverts %}
+  <h2>Liste des annonces</h2>
+
+<div id="annonces" class="col-md-8">
+{% for advert in listAdverts %}
+
+  <div class="thumbnail">
+
+
+      <ol><ul><a href="{{ path('vtc_platform_view', {'id': advert.id}) }}"><h2>{{ advert.title }}</h2></a>
+      
+{% for img in advert.images|slice(0, 1) %}
+ <div class="thumbnail">
+       <img src="{{ img.url }}" alt="{{ img.alt }}" class="img-rounded">
+    </div>
+      {% endfor %}        
+
+
+
+  Modele : {{ advert.modele }} </br>
+  Departement : {{ advert.dept }} </br>
+  Kilometres Vehicule : {{ advert.kilometres }} </br> 
+  {% if advert.pricejour %}
+  Prix : {{ advert.pricejour }}€ /jour </br>
+  {% endif %}
+  {% if advert.pricehebdo %}
+  Prix : {{ advert.pricehebdo }}€ /semaine </br>
+  {% endif %}
+  {% if advert.pricemensuel %}
+  Prix : {{ advert.pricemensuel }}€ /mois </br>
+  {% endif %}
+  {% if advert.doublage == true %}
+  Doublage possible  </br>
+  {% endif %}
+  posté le {{ advert.date|date('d/m/Y') }}  id : {{ advert.id }}</br> 
+  Commentaires: {{ advert.comments }}
+</ul>
+</ol> 
+</div>
+  {% endfor %}
+   </div>
+   
+
+   {% else %}
+   <h2 class="text-center"> Desolé, il n'y a aucune annonce pour votre recherche</h2>
+
+
+
+   {% endif %}
+
+
+
+
+{% endblock %}

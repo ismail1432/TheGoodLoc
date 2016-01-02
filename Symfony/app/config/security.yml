@@ -1,0 +1,41 @@
+# app/config/security.yml
+
+security:
+    encoders:
+        VTC\UserBundle\Entity\User: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_AUTEUR, ROLE_MODERATEUR]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        main:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern:   ^/
+            anonymous: true
+            provider:  main
+
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                remember_me: true
+                always_use_default_target_path : true
+                default_target_path: /platform/add
+                use_referer : true
+
+            logout:
+                path:       fos_user_security_logout
+                target: /platform
+
+            remember_me:
+                key:        %secret% # %secret% est un paramètre de parameters.yml
+
+    access_control:
+    #    { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+     #   { path: ^/admin, roles: ROLE_ADMIN, requires_channel: https }

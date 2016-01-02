@@ -1,0 +1,64 @@
+{# app/Resources/views/layout.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Location Vehicule VTC{% endblock %}</title>
+
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style type="text/css">
+  .lochebdo {
+    margin-left: 30px;
+      }
+  .nrj{
+    margin-bottom: 155px;
+  }
+  
+
+  </style>
+  {% endblock %}
+</head>
+
+<body>
+  <div class="container">
+    <div id="header" class="jumbotron">
+      <h1 class="text-center">Location de Vehicule Pour VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+    </div>
+{% for flash_message in app.session.flashbag.get('notice') %}
+    <div class="alert alert-warning">
+        {{ flash_message }}
+    </div>
+{% endfor %}
+    <div class="row">
+      
+      <div id="content" class="col-md-12">
+        {% block body %}
+        {% endblock %}
+      </div>
+      
+    </div>
+
+    <hr>
+
+    <footer>
+      <p>Tout droits reservés © {{ 'now'|date('Y') }} Drive Safe.</p>
+    </footer>
+  </div>
+
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  {% endblock %}
+
+</body>
+</html>

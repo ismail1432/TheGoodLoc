@@ -1,0 +1,119 @@
+<head>
+<style type="text/css">
+  #fos_user_registration_form_username, #fos_user_registration_form_email, #fos_user_registration_form_plainPassword_first, #fos_user_registration_form_plainPassword_second  {
+    margin-bottom: 10px;
+      }
+  </style>
+</head>
+
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'),}) }}
+{% if not form.vars.valid %}
+<div class="jumbotron">
+		<h1 class="text-center">> GooD LoC Vtc </h1>
+      <h3 class="text-center">Location de Vehicule Pour VTC</h3>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+      <p class="text-center">
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_home') }}">Liste des Annonces</a>
+
+</div>
+<div class="text-center">
+<div class="alert alert-danger">
+	<h2>Ce formulaire contient des erreurs</h2>
+</div>
+</div>
+
+{% endif %}
+
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="form-group">
+{{ form_label(form.username, "Votre Nom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+<div class="col-sm-6">
+{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+{% if not form.vars.valid %}
+<div class="alert alert-danger">
+   {{ form_errors(form.username) }}
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="form-group">
+{{ form_label(form.email, "Votre email", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+<div class="col-sm-6">
+{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+{% if not form.vars.valid %}
+<div class="alert alert-danger">
+   {{ form_errors(form.email) }}
+</div>
+{% endif %}
+
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="form-group">
+{{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+<div class="col-sm-6">
+{{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+{% if not form.vars.valid %}
+<div class="alert alert-danger">
+   {{ form_errors(form.plainPassword.first) }}
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="form-group">
+{{ form_label(form.plainPassword.second, "Resaisir mot de passe", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+<div class="col-sm-6">
+{{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+
+</div>
+</div>
+</div>
+</div>
+
+
+ <div class="text-center">
+ <button type="submit" class="btn btn-primary">Valider</button>
+ </div>
+</div>
+
+
+
+{{ form_rest(form) }}
+
+
+
+{{ form_end(form) }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

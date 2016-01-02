@@ -1,0 +1,22 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+ 
+    	
+    <p> <div class="jumbotron">
+      <h1 class="text-center">GOOD LOC VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+      <div class="text-center">
+      <h3>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</h3>
+    <h3>Desormais, vous pouvez postez vos annonces</h3>
+     <p><a class="btn btn-success btn-md" href="{{ path('vtc_platform_add') }}">deposer une annonce</a></p>
+    <p><a class="btn btn-primary btn-md" href="{{ path('vtc_platform_home') }}">retour au site</a></p>
+</div>
+
+{% endblock fos_user_content %}

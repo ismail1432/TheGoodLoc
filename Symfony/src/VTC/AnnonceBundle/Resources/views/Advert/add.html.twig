@@ -1,0 +1,35 @@
+
+{% extends "VTCAnnonceBundle::layout.html.twig" %}
+
+{# src/OC/PlatformBundle/Resources/views/Advert/add.html.twig #}
+
+
+
+{% block body %}
+
+  <h2>Ajouter une annonce</h2>
+
+{% if ( is_granted('ROLE_USER')) %}
+Connecté en tant que {{ app.user.username }}
+    -
+    <a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></br>
+    {% include "VTCAnnonceBundle:Advert:form.html.twig" %}
+{% else %}
+<h3> Se connecter</h3>
+{% render url('fos_user_security_login') %}</br>
+OU</br>
+<h3>S'inscrire</h3>
+  {% render url('fos_user_registration_register') %}</br> 
+
+
+
+
+{% endif %}
+
+  <p>
+    Attention : cette annonce sera ajoutée directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}
+

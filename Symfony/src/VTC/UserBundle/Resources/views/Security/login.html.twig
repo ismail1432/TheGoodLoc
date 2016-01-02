@@ -1,0 +1,58 @@
+{# app/Resources/views/layout.html.twig #}
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+  {% block javascripts %}
+    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  {% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+       
+{% if error %}
+  <div class="jumbotron">
+      <h1 class="text-center">Location de Vehicule Pour VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+      <p class="text-center">
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">Ajouter une annonce</a>
+
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">ADMIN</a>
+      {% endif %}
+
+
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">Mon compte</a>
+      </p>
+    </div>
+{% endif %}
+{% if error %}
+	<div class="alert alert-danger">
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+
+{% endif %}
+<div class="text-center">
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <div class="form-group">
+    <label for="username">{{ 'security.login.username'|trans }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    <label for="password">{{ 'security.login.password'|trans }}</label>
+    <input type="password" id="password" name="_password" required="required" />
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+    </div>
+    
+   <button type="submit" id="_submit" name="_submit" class="btn btn-success" value="{{ 'security.login.submit'|trans }}" />se connecter</button>
+    <a class="btn btn-warning btn-md" href="{{ path('fos_user_resetting_request') }}">mot de passe oublié ?</a> 
+</form>
+</div>
+
+
+
+{% endblock fos_user_content %}
