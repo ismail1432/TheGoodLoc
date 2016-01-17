@@ -1,0 +1,38 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "VTCAnnonceBundle::layout.html.twig" %}
+
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+{% block ocplatform_body %}
+<h1> DASHBOARD </h1>
+
+<div class"row">
+
+<div id="annonces" class="col-md-8">
+<h4> il y a {{ totalUsers }} utilisateurs et {{ totalAdverts }} annonces </h4>
+{% for user in listUsers %}
+  
+
+  
+
+
+      <ol><ul><a href="{{ path('vtc_platform_admin_userview', {'id': user.id}) }}"><h5>user : {{ user.username }}</h5></a>                                               
+  <h5>email : {{ user.email }}</h5>
+  <h5>Nombre d'annonces : {{ user.nbadvert }}</h5>
+  <h6><a href="{{ path('vtc_platform_admindeleteuser', {'id': user.id}) }}">Supprimer le compte de {{ user.username }} </a></h6>
+
+  
+
+  
+</ul></ol>
+{% endfor %}
+   </div>
+  
+
+{% endblock %}
+
+
+

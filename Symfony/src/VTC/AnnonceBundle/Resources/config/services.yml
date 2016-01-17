@@ -1,0 +1,6 @@
+# src/VTC/AnnonceBundle/Resources/config/services.yml
+
+services:
+    vtc_platform.visit_stats:
+        class: VTC\AnnonceBundle\Stats\VTCStats
+        arguments: [@doctrine.orm.entity_manager]

@@ -14,13 +14,15 @@
       <div class="col-sm-2">
         {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
       </div>
+      <div>
       {{ form_label(form.annee, "Annee min", {'label_attr': {'class': 'col-sm-1 control-label'}}) }}
+    </div>
       <div class="col-sm-2">
         {{ form_widget(form.annee,{'attr': {'class': 'form-control'}}) }}
       </div>
 
 
-      {{ form_label(form.kmsmin, "KM entre ", {'label_attr': {'class': 'col-sm-1 control-label'}}) }}
+      
       <div class="col-sm-2">
         {{ form_widget(form.kmsmin,{'attr': {'class': 'form-control'}}) }}
         
@@ -33,18 +35,28 @@
 </div>
 
     <div class="form-group">
-     
+
       <div class="col-sm-2">
         {{ form_widget(form.energie, {'attr': {'class': 'form-control'}}) }}
       </div>
       <div class="col-sm-2">
         {{ form_widget(form.boitevitesse, {'attr': {'class': 'form-control'}}) }}
       </div>
-    </div>
-    <h5>Caracteristiques de la location</h5>
+ 
+  </div>
+
+
+    
 
 <div class="form-group">
-  <span>
+ <div class="row">
+ <div class="col-md-4">
+<h4>Caracteristiques de la location</h4>
+</div>
+</div>
+  <span class="lochebdo">
+   
+    
       {{ form_label(form.locjour, "Vehicule dispo à la journée ?") }}
       {{ form_errors(form.locjour) }}
       {{ form_widget(form.locjour) }}
@@ -64,8 +76,8 @@
       {{ form_errors(form.doublagebool) }}
       {{ form_widget(form.doublagebool) }}
   </span>
-      </div>
   </div>
+
       
   
     <div  class="text-center">
@@ -74,5 +86,5 @@
   </div>
   {{ form_end(form) }}
 </form>
-
+  </div>
 {% endblock %}

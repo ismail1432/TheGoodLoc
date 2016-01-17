@@ -1,0 +1,36 @@
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+<div id="header" class="jumbotron">
+      <h1 class="text-center">Location de Vehicule Pour VTC</h1>
+      <p class="text-center">
+        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        <br />
+      </p>
+      <p class="text-center">
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">Ajouter une annonce</a>
+
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">ADMIN</a>
+      {% endif %}
+
+
+        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">Mon compte</a>
+      </p>
+    </div>
+
+
+
+
+<h1> Message laisser sur le site </h1> </br >
+ <br />
+
+Voici le Message :
+" {{msg}} " </br ></br >
+
+<h2> Coordonnées</h2>
+Nom : {{ nom }} </br >
+Voici son adresse mail : {{ mail }} </br >
+et son numero de telephone: {{ phone }}</br >
+
+

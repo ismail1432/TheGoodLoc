@@ -1,28 +1,40 @@
 
-{% extends "VTCAnnonceBundle::layout.html.twig" %}
+{% extends "::layout.html.twig" %}
 
 {# src/OC/PlatformBundle/Resources/views/Advert/add.html.twig #}
 
 
 
 {% block body %}
+ {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+  <p class="text-center">
+       
+{% if ( is_granted('ROLE_USER')) %}
+        <a class="btn btn-primary btn-md" href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-log-out"></i> Deconnexion</a>
+{% else %}
+<a class="btn btn-primary btn-md" href="{{ path('fos_user_security_login') }}"><i class="glyphicon glyphicon-log-in"></i> Connexion / Inscription</a>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_admin') }}"> ADMIN</a>
+      {% endif %}
 
+      	<a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
+    </a>
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_myaccount') }}">
+        	<i class="glyphicon glyphicon-home"></i> Mes annonces</a>
+        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
+    </a>
+    
+      </p>
+    </div>
   <h2>Ajouter une annonce</h2>
 
 {% if ( is_granted('ROLE_USER')) %}
-Connecté en tant que {{ app.user.username }}
-    -
-    <a href="{{ path('fos_user_security_logout') }}">Deconnexion</a></br>
+<h4> Connecté en tant que {{ app.user.username }}</h4>
+    </br>
     {% include "VTCAnnonceBundle:Advert:form.html.twig" %}
-{% else %}
-<h3> Se connecter</h3>
-{% render url('fos_user_security_login') %}</br>
-OU</br>
-<h3>S'inscrire</h3>
-  {% render url('fos_user_registration_register') %}</br> 
-
-
-
 
 {% endif %}
 

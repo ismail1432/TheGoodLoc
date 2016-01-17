@@ -1,0 +1,53 @@
+{% extends "VTCAnnonceBundle::layout.html.twig" %}
+
+{% block title %}
+  Lecture d'une annonce - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+<div clas="text-center">
+<div class="well">
+
+  <h2>{{ advert.title }}</h2>
+  <h4>Modele : {{ advert.modele }} </h4>
+ <h5>Departement : {{ advert.dept }} </h5>
+ <h5>Categorie : {{ advert.categorie }} </h5>
+ <h5>Kilometres Vehicule : {{ advert.kilometres }} </h5> 
+ <h5>Energie : {{ advert.energie }} </h5>
+ <h5>Boite de vitesse : {{ advert.boitevitesse }} </h5>
+ <h5>Interieur : {{ advert.interieur }} </h5>
+  {% if advert.pricejour %}
+ <h5>Prix : {{ advert.pricejour }}€ /jour </h5>
+  {% endif %}
+  {% if advert.pricehebdo %}
+ <h5>Prix : {{ advert.pricehebdo }}€ /semaine </h5>
+  {% endif %}
+  {% if advert.pricemensuel %}
+ <h5>Prix : {{ advert.pricemensuel }}€ /mois </h5>
+  {% endif %}
+  {% if advert.doublage == true %}
+ <h5>Doublage possible  </h5>
+  {% endif %}
+ <h5>Commentaires: {{ advert.comments }}</h5>
+ <h5>posté le {{ advert.date|date('d/m/Y') }}  id : {{ advert.id }}</h5>
+<h4>Contact</h4>
+  
+  nom: {{ advert.user.username}}</br >
+  email: {{ advert.user.email}}</br >
+
+  {% for img in advert.images %}
+
+
+<a href= "{{ img.webPath|imagine_filter('big')  }}" onclick="window.open(this.href, 'photo', 'height=500, width=550, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"><img src="{{ img.webPath|imagine_filter('view')  }}" alt="{{ img.alt }}"/></a>
+
+
+
+
+  {% endfor %} 
+
+    </br ></br >
+ 
+  </div>
+</div>
+
+

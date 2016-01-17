@@ -10,13 +10,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="VTC\AnnonceBundle\Entity\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
 
 
    /**
-   * @ORM\ManyToOne(targetEntity="VTC\UserBundle\Entity\User", inversedBy="user")
+   * @ORM\ManyToOne(targetEntity="VTC\UserBundle\Entity\User", inversedBy="adverts")
    * @ORM\JoinColumn(nullable=false)
    */
   private $user;
@@ -58,8 +59,8 @@ class Advert
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     * @Assert\Length(min = "3",
-     *                max = 15,
+     * @Assert\Length(min = "2",
+     *                max = 25,
      *                 minMessage = " le titre doit contenir minimum {{ limit }} lettres",
      *                 maxMessage = " le titre doit contenir maximum {{ limit }} lettres")
      */
@@ -70,7 +71,7 @@ class Advert
      *
      * @ORM\Column(name="modele", type="string", length=255, nullable=false)
      *@Assert\Length(min = "3",
-     *                max = 15,
+     *                max = 25,
      *                 minMessage = " le modele doit contenir minimum {{ limit }} lettres",
      *                 maxMessage = " le modele doit contenir maximum {{ limit }} lettres")
      */
@@ -95,8 +96,8 @@ class Advert
      *
      * @ORM\Column(name="pricejour", type="smallint", nullable=true)
      * @Assert\Range(
-     *      max = 250,
-     *      maxMessage = " {{ 250 }} euros maximum !"
+     *      max = 1500,
+     *      maxMessage = " {{ 1500 }} euros maximum !"
      * )
      */
     private $pricejour;
@@ -113,8 +114,8 @@ class Advert
      *
      * @ORM\Column(name="pricehebdo", type="smallint", nullable=true)
      * @Assert\Range(
-     *      max = 2250,
-     *      maxMessage = " {{ 2250 }} euros maximum !"
+     *      max = 5000,
+     *      maxMessage = " {{ 5000 }} euros maximum !"
      * )
      */
     private $pricehebdo;
@@ -131,8 +132,8 @@ class Advert
      *
      * @ORM\Column(name="pricemensuel",  nullable=true, type="smallint", nullable=true)
      * @Assert\Range(
-     *      max = 8250,
-     *      maxMessage = " 8250 euros maximum !"
+     *      max = 22250,
+     *      maxMessage = " 22250 euros maximum !"
      * )
      */
     private $pricemensuel;
@@ -867,4 +868,20 @@ class Advert
     {
         return $this->user;
     }
+
+    /**
+   * @ORM\PrePersist
+   */
+  public function increase()
+  {
+    $this->getUser()->increaseAdvert();
+  }
+
+  /**
+   * @ORM\PreRemove
+   */
+  public function decrease()
+  {
+    $this->getUser()->decreaseAdvert();
+  }
 }

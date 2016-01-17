@@ -18,6 +18,12 @@ vtc_platform_searchresult:
     requirements:
         id: \d+
 
+vtc_platform_myaccount:
+    path:      /myaccount
+    defaults:  { _controller: VTCAnnonceBundle:Advert:account }
+    requirements:
+        id: \d+
+
 vtc_platform_add:
     path:      /add
     defaults:  { _controller: VTCAnnonceBundle:Advert:add }
@@ -34,6 +40,30 @@ vtc_platform_delete:
     requirements:
         id: \d+
 
+vtc_platform_contact:
+    path:      /contact
+    defaults:  { _controller: VTCAnnonceBundle:Advert:contact }
+
+vtc_platform_deleteuser:
+    path:      /deleteuser/{id}
+    defaults:  { _controller: VTCAnnonceBundle:Advert:deleteuser }
+    requirements:
+        id: \d+
+
 vtc_platform_admin:
     path:       /admin
-    defaults: 
+    defaults: { _controller: VTCAnnonceBundle:Advert:admin }
+
+vtc_platform_admin_userview:
+    path:       /admin/userview/{id}
+    defaults: { _controller: VTCAnnonceBundle:Advert:adminuserview }
+    requirements:
+        id: \d+
+
+vtc_platform_admindeleteuser:
+    path:       /admin/deleteuser/{id}
+    defaults: { _controller: VTCAnnonceBundle:Advert:admindeleteuser }
+    requirements:
+        id: \d+
+
+

@@ -1,0 +1,88 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "VTCAnnonceBundle::layout.html.twig" %}
+
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+{% block ocplatform_body %}
+
+</div>
+{% if advert %}
+  
+  <h2>Vos annonces</h2>
+<div class="row">
+<div id="annonces" class="col-md-10">
+  {% for advert in advert %}
+<div class="well">
+
+<div>
+
+  <ol><ul><a href="{{ path('vtc_platform_view', {'id': advert.id}) }}"><h2>{{ advert.title }}</h2></a>                                               
+ 
+  <h4>Modele : {{ advert.modele }}</h4>
+  <h5>Categorie : {{ advert.categorie }}</h5>
+  <h5>Departement : {{ advert.dept }} </h5>
+  <h5>Kilometres Vehicule : {{ advert.kilometres }}
+  <h5>Année : {{ advert.annee }}</h5>
+
+  {% if advert.pricejour %}
+  <h5>Prix : {{ advert.pricejour }}€ /jour </h5>
+  {% endif %}
+  {% if advert.pricehebdo %}
+  <h5>Prix : {{ advert.pricehebdo }}€ /semaine </h5>
+  {% endif %}
+  {% if advert.pricemensuel %}
+  <h5>Prix : {{ advert.pricemensuel }}€ /mois </h5>
+  {% endif %}
+  {% if advert.doublage == true %}
+  Doublage possible  </br>
+  {% endif %}
+  annonce posté le {{ advert.date|date('d/m/Y') }}</br>
+</div>
+
+<div>
+  {% for img in advert.images %}
+  <img src="{{ img.webPath|imagine_filter('view')  }}" alt="{{ img.alt }}" class="img-rounded"/></a>
+  {% endfor %}   
+</div>
+
+<div></br>
+       <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn btn btn-warning"><i class="glyphicon glyphicon-edit"></i> Modifier l'annonce</a>
+      <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer l'annonce</a>
+</div>
+</div>
+  {% endfor %}
+
+{% else %}
+<div class="well">
+  <div class="text-center">
+  <h3> Vous n'avez pas encore d'annonces </h3>
+      <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
+     
+
+
+{% endif %}
+   </div>
+  </div>
+  </ul>
+</ol> 
+  
+
+
+
+</div>
+  </div> 
+
+ 
+
+
+
+
+
+
+{% endblock %}
+
+
+

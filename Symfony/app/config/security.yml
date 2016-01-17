@@ -26,7 +26,7 @@ security:
                 check_path: fos_user_security_check
                 remember_me: true
                 always_use_default_target_path : true
-                default_target_path: /platform/add
+                default_target_path: /platform/myaccount
                 use_referer : true
 
             logout:
@@ -37,5 +37,5 @@ security:
                 key:        %secret% # %secret% est un paramètre de parameters.yml
 
     access_control:
-    #    { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-     #   { path: ^/admin, roles: ROLE_ADMIN, requires_channel: https }
+    #  { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+    - { path: ^/platform/admin, roles: ROLE_ADMIN }

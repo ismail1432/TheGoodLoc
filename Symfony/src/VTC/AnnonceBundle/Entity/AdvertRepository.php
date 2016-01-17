@@ -178,6 +178,7 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
 
   public function getAdverts($page, $nbPerPage)
   {
+
     $query = $this->createQueryBuilder('a')
       ->orderBy('a.date', 'DESC')
       ->getQuery()
@@ -194,6 +195,19 @@ class AdvertRepository extends \Doctrine\ORM\EntityRepository
     // (n'oubliez pas le use correspondant en début de fichier)
     return new Paginator($query, true);
   }
+
+    public function getUserAdverts($id)
+  {
+    $qb = $this->createQueryBuilder('a')
+
+    ->where('a.user = :user')
+    ->setParameter('user', $id);
+  
+  return $qb->getQuery()->getResult()
+  ;
+  }
+
+
 
 
 

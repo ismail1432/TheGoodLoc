@@ -1,17 +1,68 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<p> <div class="jumbotron">
+<div class="jumbotron">
       <h1 class="text-center">GOOD LOC VTC</h1>
       <p class="text-center">
         Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
         <br />
       </p>
   </div>
+  <div>
+      <p class="text-center">
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
+        <a class="btn btn-primary btn-md" href="{{ path('fos_user_security_logout') }}">Deconnexion</a>
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">ADMIN</a>
+      {% endif %}
+
+        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
+    </a>
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_myaccount') }}">
+          <i class="glyphicon glyphicon-home"></i> Mes annonces</a>
+        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
+    </a>
+
+    
+      </p>
+    </div>
+  </div></br >
   <div class="text-center">
 
 {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-    {{ form_widget(form) }}
+    <div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="form-group">
+{{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+<div class="col-sm-6">
+{{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+{% if not form.vars.valid %}
+<div class="alert alert-danger">
+   {{ form_errors(form.plainPassword.first) }}
+</div>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<div class="form-group">
+{{ form_label(form.plainPassword.second, "Resaisir mot de passe", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+<div class="col-sm-6">
+{{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+
+</div>
+</div>
+</div>
+</div>
+
     <div>
-        <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" />
+       
+      <button type="submit" class="btn btn-success" value="{{ 'change_password.submit'|trans }}" />Modifier le mot de passe</button>
+  
     </div>
+
 {{ form_end(form) }}
 </div>

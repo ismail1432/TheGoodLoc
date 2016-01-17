@@ -18,7 +18,7 @@ class AdvertType extends AbstractType
         
            // ->add('date')
             ->add('dept', 'choice', array('choices'  => array('75' => '75 Paris', '77' => '77 Seine et Marne', '78' => '78 Yvelines', '91' => '91 Essonne', '92' => '92 Haut de Seine', '93' => '93 Seine saint Denis', '94' => '94 Val de Marne', '95' => '95 Oise'), 'multiple' => false,))
-            ->add('title')
+            ->add('title', 'text', array( 'required' => true,))
             ->add('modele')
             ->add('categorie', 'choice', array('choices'  => array('Eco' => 'Eco (508, C5, Ds5... UerX)', 'Berline / Limousine' => 'Berline / Limousine', 'Van' => 'Van'), 'multiple' => false,))
     // before 2.7, this option didn't actually exist, but the

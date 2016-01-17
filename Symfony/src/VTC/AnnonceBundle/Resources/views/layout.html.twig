@@ -11,20 +11,24 @@
   {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
   <p class="text-center">
         <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
-
+{% if ( is_granted('ROLE_USER')) %}
+        <a class="btn btn-primary btn-md" href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-log-out"></i> Deconnexion</a>
+{% else %}
+<a class="btn btn-primary btn-md" href="{{ path('fos_user_security_login') }}"><i class="glyphicon glyphicon-log-in"></i> Connexion / Inscription</a>
+{% endif %}
 {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">ADMIN</a>
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_admin') }}"> ADMIN</a>
       {% endif %}
 
-
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">Mon compte</a>
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">Mon compte</a>
+      	<a href="{{ path('vtc_platform_contact') }}" class="btn btn-info">
+      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
+    </a>
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_myaccount') }}">
+        	<i class="glyphicon glyphicon-home"></i> Mes annonces</a>
         <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
       <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
     </a>
-    <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
-      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
-    </a>
+    
       </p>
     </div>
 

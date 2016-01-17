@@ -38,6 +38,7 @@
 
   {% for img in advert.images %}
 
+
 <a href= "{{ img.webPath|imagine_filter('big')  }}" onclick="window.open(this.href, 'photo', 'height=500, width=550, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"><img src="{{ img.webPath|imagine_filter('view')  }}" alt="{{ img.alt }}"/></a>
 
 
@@ -50,15 +51,11 @@
   </div>
 </div>
   <p>
-    <a href="{{ path('vtc_platform_home') }}" class="btn btn-default">
+    <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
       <i class="glyphicon glyphicon-chevron-left"></i>
       Retour à la liste
     </a>
-    <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
-      <i class="glyphicon glyphicon-trash"></i>
-      Contacter
-    </a>
-    <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn btn-default">
+    <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn btn-warning">
       <i class="glyphicon glyphicon-edit"></i>
       Modifier l'annonce
     </a>

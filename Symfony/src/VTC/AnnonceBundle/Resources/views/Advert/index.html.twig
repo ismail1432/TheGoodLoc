@@ -15,7 +15,7 @@
 
 </div>
 </div>
-  <h2>{{total}} annonces</h2>
+  <h2>{{total}} annonces {{heure}} {{substite}}</h2>
 <div id="annonces" class="col-md-8">
 
 {% for advert in listAdverts %}
@@ -28,7 +28,7 @@
   <h4>Modele : {{ advert.modele }}</h4>
   <h5>Categorie : {{ advert.categorie }}</h5>
   <h5>Departement : {{ advert.dept }} </h5>
-  <h5>Kilometres Vehicule : {{ advert.kilometres }}
+  <h5>Kilometres Vehicule : {{ advert.kilometres }}</h5>
   <h5>Année : {{ advert.annee }}</h5>
 
   {% if advert.pricejour %}

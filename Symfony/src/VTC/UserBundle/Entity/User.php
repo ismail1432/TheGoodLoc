@@ -12,7 +12,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {	
   /**
-   * @ORM\OneToMany(targetEntity="VTC\AnnonceBundle\Entity\Advert", mappedBy="advert")
+   * @ORM\OneToMany(targetEntity="VTC\AnnonceBundle\Entity\Advert", mappedBy="user", cascade={"persist", "remove"} )
    * @ORM\JoinColumn(nullable=true)
    */
   private $adverts;
@@ -68,4 +68,29 @@ class User extends BaseUser
     {
         return $this->adverts;
     }
+
+    /**
+   * @ORM\Column(name="nb_adverts", type="integer")
+   */
+  private $nbAdvert = 0;
+
+  public function increaseAdvert()
+  {
+    $this->nbAdvert++;
+  }
+
+  public function decreaseAdvert()
+  {
+    $this->nbAdvert--;
+
+  }
+
+  public function getnbAdvert()
+    {
+        return $this->nbAdvert;
+    }
+
+
+  
+
 }

@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new VTC\AnnonceBundle\VTCAnnonceBundle(),
             new VTC\UserBundle\VTCUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-  
+        
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

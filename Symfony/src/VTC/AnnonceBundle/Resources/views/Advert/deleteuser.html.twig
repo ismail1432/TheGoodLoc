@@ -1,0 +1,24 @@
+{% extends "VTCAnnonceBundle::layout.html.twig" %}
+{% block title %}
+  Suppression de votre compte - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h2>Supprimer votre compte</h2>
+
+  <p>
+    Etes-vous certain de vouloir supprimer votre compte {{ user.username }} ?
+  </p>
+
+  {# On met l'id de l'annonce dans la route de l'action du formulaire #}
+  <form action="{{ path('vtc_platform_deleteuser', {'id': user.id}) }}" method="post">
+    
+    {# Ici j'ai écrit le bouton de soumission à la main #}
+    <input type="submit" value="Supprimer" class="btn btn-danger" />
+    {# Ceci va générer le champ CSRF #}
+    {{ form_rest(form) }}
+    
+  </form>
+
+{% endblock %}
