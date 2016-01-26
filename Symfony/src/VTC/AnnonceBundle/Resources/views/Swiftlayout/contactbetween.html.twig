@@ -1,38 +1,27 @@
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-</head>
-<div id="header" class="jumbotron">
-      <h1 class="text-center">Location de Vehicule Pour VTC</h1>
-      <p class="text-center">
+
+<div>
+      <h1>Location de Vehicule Pour VTC</h1>
+      <p>
         Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
         <br />
       </p>
-      <p class="text-center">
-        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">Ajouter une annonce</a>
-
-{% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">ADMIN</a>
-      {% endif %}
-
-
-        <a class="btn btn-primary btn-lg" href="{{ path('vtc_platform_add') }}">Mon compte</a>
-      </p>
+        <h3><a href="thegoodloc.fr">The GoOD LoC</a></h3>
     </div>
 
 
 
-
 Bonjour {{ advert.user.username }} </br ></br >
-Vous avez reçu un message concernant votre annonce sur EntreVtc " {{ advert.title }} " <br />
-<a href="{{ path('vtc_platform_view', {'id': advert.id}) }}">voir l'annonce </a> </br ></br >
+Vous avez reçu un message concernant votre annonce sur TheGoodLoc " {{ advert.title }} " <br />
+<a href="{{ path('vtc_platform_view', {'id': advert.id}) }}"> voir l'annonce </a> </br ></br >
+
 Voici le Message :
 " {{msg}} " </br ></br >
-<h4> Coordonneés </h4>
-Nom : {{ nom }} </br >
+<h4> Coordonneés : </h4>
+Nom : {{ name }} </br >
 Voici son adresse mail : {{ mail }} </br >
 et son numero de telephone: {{ phone }}</br >
 
 La personne qui vous a contacter ne connais pas vos coordonnées tant que vous ne lui avez pas repondu</br ></br >
 
 à bientôt,</br >
-L'equipe ENTREvtC
+L'equipe The GoOd LoC 

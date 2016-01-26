@@ -49,9 +49,9 @@ class Advert
     private $date;
 
     /**
-     * @var smallint
+     * @var string
      *
-     * @ORM\Column(name="dept", type="smallint")
+     * @ORM\Column(name="dept", type="string", length=255,)
      */
     private $dept;
 

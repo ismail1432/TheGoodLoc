@@ -3,13 +3,39 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-	<p> <div class="jumbotron">
-      <h1 class="text-center">GOOD LOC VTC</h1>
+	<body>
+  <div class="container">
+    <div id="header" class="jumbotron">
+      <h1 class="text-center">The GoOd LoC</h1>
+      <h2 class="text-center">location de vehicule apte a la profession de vtc</h2>
       <p class="text-center">
-        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
+        Ce site à pour but de faciliter la mise en relation<br />
+        entre les chauffeurs professionnels et les loueurs de vehicule apte au transport de personne.
         <br />
       </p>
-  </div>
+       <p class="text-center">
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
+{% if ( is_granted('ROLE_USER')) %}
+        <a class="btn btn-info btn-md" href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-log-out"></i> Deconnexion</a>
+{% else %}
+<a class="btn btn-info btn-md" href="{{ path('fos_user_security_login') }}"><i class="glyphicon glyphicon-log-in"></i> Connexion / Inscription</a>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_admin') }}"> ADMIN</a>
+      {% endif %}
+
+        <a href="{{ path('vtc_platform_contact') }}" class="btn btn-primary">
+      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
+    </a>
+        <a class="btn btn-info btn-md" href="{{ path('vtc_platform_myaccount') }}">
+          <i class="glyphicon glyphicon-home"></i> Mes annonces</a>
+        <a href="{{ path('vtc_platform_home') }}" class="btn btn-primary">
+      <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
+    </a>
+    
+      </p>
+    </div>
+    </div>
   <div class="text-center">
     <h4>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</h4>
      <div class="alert alert-warning">

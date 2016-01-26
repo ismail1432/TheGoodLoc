@@ -12,6 +12,12 @@ vtc_platform_view:
     requirements:
         id: \d+
 
+vtc_platform_partager:
+    path:      /advert/{id}
+    defaults:  { _controller: VTCAnnonceBundle:Advert:partager }
+    requirements:
+        id: \d+
+
 vtc_platform_searchresult:
     path:      /searchresult
     defaults:  { _controller: VTCAnnonceBundle:Advert:mysearch }

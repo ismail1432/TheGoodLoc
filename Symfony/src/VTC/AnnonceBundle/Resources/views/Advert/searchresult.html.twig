@@ -19,16 +19,28 @@
 
 <div id="annonces" class="col-md-8">
 
-{% for advert in listAdv %}
+{% for advert in listAdverts %}
 
   <div class="thumbnail">
 
 
       <ol><ul><a href="{{ path('vtc_platform_view', {'id': advert.id}) }}"><h2>{{ advert.title }}</h2></a>                                               
- 
+ {% if advert.modele %}
   <h4>Modele : {{ advert.modele }}</h4>
+    {% endif %}
+  {% if advert.categorie %}
+  <h5>Categorie : {{ advert.categorie }}</h5>
+    {% endif %}
+  {% if advert.dept %}
   <h5>Departement : {{ advert.dept }} </h5>
-  <h5>Kilometres Vehicule : {{ advert.kilometres }}
+    {% endif %}
+  {% if advert.kilometres %}
+  <h5>Kilometres Vehicule : {{ advert.kilometres }}</h5>
+    {% endif %}
+  {% if advert.annee %}
+  <h5>Année : {{ advert.annee }}</h5>
+    {% endif %}
+
   {% if advert.pricejour %}
   <h5>Prix : {{ advert.pricejour }}€ /jour </h5>
   {% endif %}
@@ -41,16 +53,26 @@
   {% if advert.doublage == true %}
   Doublage possible  </br>
   {% endif %}
-  posté le {{ advert.date|date('d/m/Y') }}</br> 
+  annonce posté le {{ advert.date|date('d/m/Y') }}</br > </br > 
   {% for img in advert.images|slice(0, 1) %}
  
-       <img 
-  src="{{ img.webPath|imagine_filter('platform') }}"  alt="{{ img.alt }}"class="img-rounded"/>
+       <img src="{{ img.webPath|imagine_filter('platform') }}"  alt="{{ img.alt }}"class="img-rounded"/>
        {% endfor %}   
 </ul>
 </ol> 
+
 </div>
   {% endfor %}
+  <div class="text-center">
+  <ul class="pagination">
+  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+  {% for p in range(1, nbPages) %}
+    <li{% if p == page %} class="active"{% endif %}>
+      <a href="{{ path('vtc_platform_home', {'page': p}) }}">{{ p }}</a>
+    </li>
+  {% endfor %}
+</ul>
+   </div>
    </div>
 
    {% else %}

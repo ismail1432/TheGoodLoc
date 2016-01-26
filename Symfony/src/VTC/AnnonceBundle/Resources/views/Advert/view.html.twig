@@ -1,4 +1,3 @@
-
 {% extends "VTCAnnonceBundle::layout.html.twig" %}
 
 {% block title %}
@@ -8,48 +7,116 @@
 {% block ocplatform_body %}
 <div clas="text-center">
 <div class="well">
-
+<div class="alert alert-warning">
+    <h5>Mefiez-Vous des annonçes allechantes !<br /> nous ne sommes pas tenus responsable de la veracité des informations, 
+    nous faisons simplement de la mise en relation
+    </h5>
+    </div>
+    {% if advert.title %}
   <h2>{{ advert.title }}</h2>
-  <h4>Modele : {{ advert.modele }} </h4>
- <h5>Departement : {{ advert.dept }} </h5>
- <h5>Categorie : {{ advert.categorie }} </h5>
- <h5>Kilometres Vehicule : {{ advert.kilometres }} </h5> 
- <h5>Energie : {{ advert.energie }} </h5>
- <h5>Boite de vitesse : {{ advert.boitevitesse }} </h5>
- <h5>Interieur : {{ advert.interieur }} </h5>
+        {% endif %}
+
+  <div class="row">
+  <div class="col-md-6 col-sm-12">
+  <table class="table table-striped">
+  <tbody>
+
+{% if advert.modele  %}
+    <tr>
+  <td><h5>Modele<h5/></td> <td><h4> {{ advert.modele }} </h4></td>
+    </tr>
+
+ {% endif %}
+  {% if advert.dept %}
+     <tr>
+ <td><h5>Departement</h5></td> <td><h4> {{ advert.dept }} </h4></td>
+  </tr>
+ {% endif %}
+ {% if advert.categorie %}
+   <tr>
+ <td><h5>Categorie</h5></td> <td><h4>{{ advert.categorie }} </h4></td>
+  </tr>
+ {% endif %}
+ {% if advert.kilometres %}
+   <tr>
+ <td><h5>Kilometres du Vehicule</h5><td><h4>{{ advert.kilometres }} kms </h5> </td>
+  </tr>
+ {% endif %}
+ {% if advert.energie %}
+   <tr>
+ <td><h5>Energie</h5></td> <td><h4>{{ advert.energie }} </h5></td>
+ {% endif %}
+
+ {% if advert.boitevitesse %}
+   <tr>
+ <td><h5>Boite de vitesse</h5></td> <td><h4>{{ advert.boitevitesse }} </h4></td>
+  </tr>
+ {% endif %}
+
+ {% if advert.interieur %}
+   <tr>
+<td> <h5>Interieur</h5></td> <td><h4> {{ advert.interieur }} </h4></td>
+ </tr>
+ {% endif %}
+
   {% if advert.pricejour %}
- <h5>Prix : {{ advert.pricejour }}€ /jour </h5>
+     <tr>
+ <td><h5>Prix à la journée</h5></td> <td><h4>{{ advert.pricejour }} € </h4></td>
+  </tr>
   {% endif %}
+
   {% if advert.pricehebdo %}
- <h5>Prix : {{ advert.pricehebdo }}€ /semaine </h5>
+     <tr>
+ <td><h5>Prix à la semaine</h5></td> <td><h4>{{ advert.pricehebdo }} € </h4></td>
+  </tr>
   {% endif %}
   {% if advert.pricemensuel %}
- <h5>Prix : {{ advert.pricemensuel }}€ /mois </h5>
+     <tr>
+ <td><h5>Prix mensuel</h5></td> <td><h4> {{ advert.pricemensuel }} € </h4></td>
+  </tr>
   {% endif %}
+{% if advert.kilometremax %}
+   <tr>
+ <td><h5>Kilometrage maximum /mois</h5></td> <td><h4>{{ advert. kilometremax }} kms </h4></td>
+  </tr>
+  {% endif %}
+
   {% if advert.doublage == true %}
- <h5>Doublage possible  </h5>
+     <tr>
+ <td><h5>Doublage possible</h5></td>
+  </tr>
   {% endif %}
- <h5>Commentaires: {{ advert.comments }}</h5>
- <h5>posté le {{ advert.date|date('d/m/Y') }}  id : {{ advert.id }}</h5>
-<h4>Contact</h4>
-  
-  nom: {{ advert.user.username}}</br >
-  email: {{ advert.user.email}}</br >
+  {% if advert.comments %}
+   <tr>
+ <td><h5>Commentaires</h5> <h4> {{ advert.comments }}</h4></td>
+  </tr>
+ {% endif %}
+   <tr>
+ <td><h5>posté le {{ advert.date|date('d/m/Y') }} </h5></td>
+  </tr>
 
+  </tbody>
+</table>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12 col-sm-12">
   {% for img in advert.images %}
-
-
 <a href= "{{ img.webPath|imagine_filter('big')  }}" onclick="window.open(this.href, 'photo', 'height=500, width=550, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"><img src="{{ img.webPath|imagine_filter('view')  }}" alt="{{ img.alt }}"/></a>
 
 
 
 
   {% endfor %} 
-
-    </br ></br >
-  {% include "VTCAnnonceBundle:Advert:contactmail.html.twig" %}
-  </div>
 </div>
+</div>
+</br ></br >
+  {% include "VTCAnnonceBundle:Advert:contactmail.html.twig" %}
+  </br >
+  {% include "VTCAnnonceBundle:Advert:partageannonce.html.twig" %}
+</br >
+<div>
   <p>
     <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
       <i class="glyphicon glyphicon-chevron-left"></i>
@@ -63,7 +130,7 @@
       <i class="glyphicon glyphicon-trash"></i>
       Supprimer l'annonce
     </a>
-
   </p>
-
+</div>
+</div>
 {% endblock %}

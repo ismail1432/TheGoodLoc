@@ -17,7 +17,7 @@ class AdvertType extends AbstractType
         $builder
         
            // ->add('date')
-            ->add('dept', 'choice', array('choices'  => array('75' => '75 Paris', '77' => '77 Seine et Marne', '78' => '78 Yvelines', '91' => '91 Essonne', '92' => '92 Haut de Seine', '93' => '93 Seine saint Denis', '94' => '94 Val de Marne', '95' => '95 Oise'), 'multiple' => false,))
+            ->add('dept', 'choice', array('choices'  => array('Alsace' => 'Alsace', 'Aquitaine' => 'Aquitaine', 'Auvergne' => 'Auvergne', 'Basse-Normandie' => 'Basse-Normandie', 'Bourgogne' => 'Bourgogne', 'Bretagne' => 'Bretagne', 'Centre' => 'Centre', 'Champagne-Ardenne' => 'Champagne-Ardenne', 'Corse' => 'Corse', 'Franche-Comté' => 'Franche-Comté', 'Haute-Normandie' => 'Haute-Normandie', '75' => '75 Paris', '77' => '77 Seine et Marne', '78' => '78 Yvelines', '91' => '91 Essonne', '92' => '92 Haut de Seine', '93' => '93 Seine saint Denis', '94' => '94 Val de Marne', '95' => '95 Oise', 'Languedoc-Roussillon' => 'Languedoc-Roussillon', 'Limousin' =>'Limousin', 'Lorraine' =>'Lorraine', 'Lorraine' =>'Lorraine', 'Midi-Pyrénées' =>'Midi-Pyrénées', 'Nord-Pas-de-Calais' =>'Nord-Pas-de-Calais', 'Pays de la Loire' =>'Pays de la Loire', 'Picardie' =>'Picardie', 'Poitou-Charentes' =>'Poitou-Charentes', 'Provence-Alpes-Côte d\'Azur' =>'Provence-Alpes-Côte d\'Azur', 'Rhône-Alpes' =>'Rhône-Alpes',  ), 'multiple' => false,))
             ->add('title', 'text', array( 'required' => true,))
             ->add('modele')
             ->add('categorie', 'choice', array('choices'  => array('Eco' => 'Eco (508, C5, Ds5... UerX)', 'Berline / Limousine' => 'Berline / Limousine', 'Van' => 'Van'), 'multiple' => false,))
@@ -29,9 +29,9 @@ class AdvertType extends AbstractType
                                               'Juin' => 'Juin', 'Juil' => 'Juil', 'Aout' => 'Aout', 'Sep' =>'Sep', 'Oct'=>'Oct', 'Nov' =>'Nov', 'Dec' => 'Dec')))
 
 
-            ->add('boitevitesse', 'choice', array('choices'  => array('Automatique' => 'Automatique', 'Manuelle' => 'Manuelle'), 'expanded' => true,))
+            ->add('boitevitesse', 'choice', array('choices'  => array('Automatique' => 'Automatique', 'Manuelle' => 'Manuelle'), 'expanded' => true, ))
             ->add('energie', 'choice', array('choices'  => array('Diesel' => 'Diesel', 'Hybride' => 'Hybride', 'Essence' => 'Essence', 'Electrique' => 'Electrique', 'Hybride' => 'Hybride'), 'expanded' => true,))
-            ->add('kilometres')
+            ->add('kilometres', 'text' ,  array( 'required' => true,))
             ->add('interieur', 'choice', array('choices'  => array('Cuir' => 'Cuir', 'Semi-Cuir' => 'Semi-Cuir', 'Tissu' => 'Tissu'), 'expanded' => true,))
 
             ->add('assurance','checkbox',  array( 'required' => false,))
@@ -49,7 +49,7 @@ class AdvertType extends AbstractType
             
             
             
-            ->add('comments','textarea', array('attr' => array('cols' => 40, 'rows' => 10, 'required' => false) ))
+            ->add('comments','textarea', array('required' => false, 'attr' => array('cols' => 40, 'rows' => 10, )))
 
 
           ->add('images', 'collection', array(

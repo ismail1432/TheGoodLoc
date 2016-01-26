@@ -8,8 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use VTC\AnnonceBundle\Entity\Advert;
 use VTC\UserBundle\Entity\User;
 use VTC\AnnonceBundle\Entity\Image;
-
-
 use VTC\AnnonceBundle\Form\AdvertType;
 use VTC\AnnonceBundle\Form\ImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,13 +27,29 @@ class AdvertController extends Controller
 {
  	  public function indexAction($page)
   {
+      $em = $this->getDoctrine()->getManager();
+
       $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
-      $heure = date("H:i");
-      $substite = date ('-5 H');
+     // $visitor = $em->getRepository('VTCAnnonceBundle:Statistique')->getIpvisitor($ip);
+      $visitor = $em->getRepository('VTCAnnonceBundle:Statistique')->findOneByIp($ip);
 
+      if(null === $visitor)
+      {
+      $this->container->get('vtc_platform.visit_stats')->addVisitor($ip);
+      }
+      
+      $lasttime = $visitor->getLastconnect();
 
-     $this->container->get('vtc_platform.visit_stats')->addVisit();
-    
+      $lastdate = $lasttime->getTimestamp();
+      $datenow = strtotime("now" - "5 hours"); 
+
+      if(($lastdate - $datenow) > 18000)
+      
+    {
+       $this->container->get('vtc_platform.visit_stats')->addVisit($ip);
+       
+    }
+   
     if ($page < 1) {
       // On déclenche une exception NotFoundHttpException, cela va afficher
       // une page d'erreur 404 (qu'on pourra personnaliser plus tard d'ailleurs)
@@ -46,7 +60,7 @@ class AdvertController extends Controller
 
     // Ici je fixe le nombre d'annonces par page à 3
     // Mais bien sûr il faudrait utiliser un paramètre, et y accéder via $this->container->getParameter('nb_per_page')
-    $nbPerPage = 10;
+    $nbPerPage = 3;
 
     // On récupère notre objet Paginator
     $listAdverts = $this->getDoctrine()
@@ -70,42 +84,129 @@ class AdvertController extends Controller
       'page'        => $page,
       'total'       => $total,
       'form' => $form->createView(),
-     'heure'=> $heure,
-     'substite' => $substite,
-    ));
+     'lasttime' => $lasttime,
+     'lastdate' => $lastdate,
+     
+
+
+         ));
 
   }
+
+  public function partagerAction( Request $request)
+  {
+    $em = $this->getDoctrine()->getManager();
+    $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
+    $visitor = $em->getRepository('VTCAnnonceBundle:Statistique')->findOneByIp($ip);
+    if(null === $visitor)
+      {
+      $this->container->get('vtc_platform.visit_stats')->addVisitor($ip);
+      }
+      
+      $lasttime = $visitor->getLastconnect();
+
+      $lastdate = $lasttime->getTimestamp();
+      $datenow = strtotime("now" - "5 hours"); 
+
+      if(($lastdate - $datenow) > 18000)
+      
+    {
+       $this->container->get('vtc_platform.visit_stats')->addVisit($ip);
+       
+    }
+
+  if($request->getMethod() == 'POST')
+
+        {
+          $message= \Swift_Message::newInstance()
+          ->setSubject('Cette annonce peut vous interesser')
+          ->setFrom('thegoodloc@gmail.com')
+          ->setTo($_POST['email'])
+          ->setCharset('utf-8')
+          ->setContentType('text/html')
+          ->setBody($this->renderView('VTCAnnonceBundle:Swiftlayout:partage.html.twig', array('advert' =>$advert, 
+            'nom' => $_POST['nom'])
+          ));
+
+          $this->get('mailer')->send($message);
+
+          $request->getSession()->getFlashBag()->add('notice', 'L\'annonce a bien été envoyé ');
+
+          $this->container->get('vtc_platform.visit_stats')->addMailsend($ip);
+    }
+
+    return $this->redirect($this->generateUrl('vtc_platform_home'));
+  }
+
 
   public function viewAction($id, Request $request)
    {
     $em = $this->getDoctrine()->getManager();
+    $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
+    $visitor = $em->getRepository('VTCAnnonceBundle:Statistique')->findOneByIp($ip);
+    if(null === $visitor)
+      {
+      $this->container->get('vtc_platform.visit_stats')->addVisitor($ip);
+      }
+      
+      $lasttime = $visitor->getLastconnect();
 
-    // On récupère l'annonce $id
+      $lastdate = $lasttime->getTimestamp();
+      $datenow = strtotime("now" - "5 hours"); 
+
+      if(($lastdate - $datenow) > 18000)
+      
+    {
+       $this->container->get('vtc_platform.visit_stats')->addVisit($ip);
+       
+    }
     $advert = $em->getRepository('VTCAnnonceBundle:Advert')->find($id);
 
     if (null === $advert) {
       throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
     }
      if($request->getMethod() == 'POST')
+     {
+          if(isset($_POST['validation']))
+            {
+              $message= \Swift_Message::newInstance()
+              ->setSubject('Votre annonce ' . $advert->getTitle() . ' sur le site Entre VtC ')
+              ->setFrom('thegoodloc@gmail.com')
+              ->setTo($advert->getUser()->getEmailCanonical())
+              ->setCharset('utf-8')
+              ->setContentType('text/html')
+              ->setBody($this->renderView('VTCAnnonceBundle:Swiftlayout:contactbetween.html.twig', array('advert' =>$advert,
+                'mail' =>$_POST['mail'], 'msg' => $_POST['msg'], 'phone' => $_POST['phone'], 'name' => $_POST['name'])
+              ));
 
-        {
+              $this->get('mailer')->send($message);
+
+              $request->getSession()->getFlashBag()->add('notice', 'Votre message a bien été envoyé.');
+
+              $this->container->get('vtc_platform.visit_stats')->addMailsend($ip);
+        }
+
+    else
+    {
+
           $message= \Swift_Message::newInstance()
-          ->setSubject('Votre annonce ' . $advert->getTitle() . ' sur le site Entre VtC ')
-          ->setFrom('parisparcoeur@gmail.com')
-          ->setTo($_POST['mail'])             //$advert->getUser()->getEmailCanonical()
+          ->setSubject('Cette annonce peut vous interesser')
+          ->setFrom('thegoodloc@gmail.com')
+          ->setTo($_POST['email'])
           ->setCharset('utf-8')
           ->setContentType('text/html')
-          ->setBody($this->renderView('VTCAnnonceBundle:Swiftlayout:contactbetween.html.twig',array('advert' =>$advert,
-            'mail' =>$_POST['mail'], 'msg' => $_POST['msg'], 'phone' => $_POST['phone'], 'name' =>$_POST['name'])
+          ->setBody($this->renderView('VTCAnnonceBundle:Swiftlayout:partage.html.twig', array('advert' =>$advert, 
+            'nom' => $_POST['nom'])
           ));
 
           $this->get('mailer')->send($message);
 
-          $request->getSession()->getFlashBag()->add('notice', 'Votre message a bien etait envoyer.');
+          $request->getSession()->getFlashBag()->add('notice', 'L\'annonce a bien été envoyé ');
 
-      return $this->redirect($this->generateUrl('vtc_platform_home'));
+          $this->container->get('vtc_platform.visit_stats')->addMailsend($ip);
     }
 
+}
    return $this->render('VTCAnnonceBundle:Advert:view.html.twig', array(
       'advert' => $advert,
      
@@ -129,7 +230,7 @@ class AdvertController extends Controller
 
           $this->get('mailer')->send($message);
 
-          $request->getSession()->getFlashBag()->add('notice', 'Votre message a bien etait envoyer.');
+          $request->getSession()->getFlashBag()->add('notice', 'Votre message a bien été envoyé.');
 
       return $this->redirect($this->generateUrl('vtc_platform_home'));
     }
@@ -148,18 +249,20 @@ class AdvertController extends Controller
        return $this->redirectToRoute('fos_user_security_login');
     }
 
-    $id = $this->get('security.token_storage')->getToken()->getUser();
+    $user = $this->get('security.token_storage')->getToken()->getUser();
 
    
     $em = $this->getDoctrine()->getManager();
     // On récupère l'annonce $id
-    $advert = $em->getRepository('VTCAnnonceBundle:Advert')->getUserAdverts($id);
+    $advert = $em->getRepository('VTCAnnonceBundle:Advert')->getUserAdverts($user);
     if (null === $advert) {
       throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
     }
     
     return $this->render('VTCAnnonceBundle:Advert:myaccount.html.twig',array(
       'advert' => $advert,
+      'user' => $user
+
       ));
 
   }
@@ -386,6 +489,11 @@ class AdvertController extends Controller
     // recupere tous les user
     $listUsers = $em->getRepository('VTCUserBundle:User')->findAll();
     $listadverts = $em->getRepository('VTCAnnonceBundle:Advert')->findAll();
+    $totalVisits = $em->getRepository('VTCAnnonceBundle:Statistique')->getVisitorsnumber();
+    $totalMailsend = $em->getRepository('VTCAnnonceBundle:Statistique')->getMailsend();
+
+
+    // $totalVisits = $allvisits;
     $totalAdverts = count($listadverts);
     $totalUsers = count($listUsers);
     
@@ -393,7 +501,9 @@ class AdvertController extends Controller
      return $this->render('VTCAnnonceBundle:Advert:admin.html.twig', array(
       'listUsers' => $listUsers,
       'totalAdverts' => $totalAdverts,
-      'totalUsers' => $totalUsers
+      'totalUsers' => $totalUsers,
+      'totalVisits' => $totalVisits,
+      'totalMailsend' =>$totalMailsend
       
     ));
 
@@ -438,6 +548,7 @@ class AdvertController extends Controller
    {
     $em = $this->getDoctrine()->getManager();
     $listadvertuser = $em->getRepository('VTCAnnonceBundle:Advert')->getUserAdverts($id);
+
     
   return $this->render('VTCAnnonceBundle:Advert:adminuserview.html.twig', array(
       'listadvertuser' => $listadvertuser,

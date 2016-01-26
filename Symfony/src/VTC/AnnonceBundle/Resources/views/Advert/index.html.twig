@@ -15,7 +15,9 @@
 
 </div>
 </div>
-  <h2>{{total}} annonces {{heure}} {{substite}}</h2>
+
+  <h2>{{total}} annonces </h2>
+
 <div id="annonces" class="col-md-8">
 
 {% for advert in listAdverts %}
@@ -24,12 +26,21 @@
 
 
       <ol><ul><a href="{{ path('vtc_platform_view', {'id': advert.id}) }}"><h2>{{ advert.title }}</h2></a>                                               
- 
+ {% if advert.modele %}
   <h4>Modele : {{ advert.modele }}</h4>
+    {% endif %}
+  {% if advert.categorie %}
   <h5>Categorie : {{ advert.categorie }}</h5>
+    {% endif %}
+  {% if advert.dept %}
   <h5>Departement : {{ advert.dept }} </h5>
+    {% endif %}
+  {% if advert.kilometres %}
   <h5>Kilometres Vehicule : {{ advert.kilometres }}</h5>
+    {% endif %}
+  {% if advert.annee %}
   <h5>Année : {{ advert.annee }}</h5>
+    {% endif %}
 
   {% if advert.pricejour %}
   <h5>Prix : {{ advert.pricejour }}€ /jour </h5>
@@ -43,7 +54,7 @@
   {% if advert.doublage == true %}
   Doublage possible  </br>
   {% endif %}
-  annonce posté le {{ advert.date|date('d/m/Y') }}</br> 
+  annonce posté le {{ advert.date|date('d/m/Y') }}</br > </br > 
   {% for img in advert.images|slice(0, 1) %}
  
        <img src="{{ img.webPath|imagine_filter('platform') }}"  alt="{{ img.alt }}"class="img-rounded"/>

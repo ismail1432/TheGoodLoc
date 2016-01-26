@@ -12,7 +12,9 @@
 <div class"row">
 
 <div id="annonces" class="col-md-8">
-<h4> il y a {{ totalUsers }} utilisateurs et {{ totalAdverts }} annonces </h4>
+<h4>{{ totalUsers }} utilisateurs </h4> <h4>{{ totalAdverts }} annonces </h4>
+<h4> {% for totalVisits in totalVisits %} {{ totalVisits}} visites  {% endfor %}</h4>
+<h4>{% for totalMailsend in totalMailsend %} {{ totalMailsend}} email envoyés</h4> {% endfor %}
 {% for user in listUsers %}
   
 

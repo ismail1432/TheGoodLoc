@@ -3,7 +3,7 @@
 #}
 
 <h3>Formulaire d'annonce</h3>
-<h5>Mettez le plus d'infos possible afin de ne pas être contacter inutilement</h5>
+<h5 class="alert alert-warning">Mettez le plus d'infos possible afin de ne pas être contacter inutilement</h5>
 <div class="well">
   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
@@ -25,7 +25,7 @@
  <h4>Caracteristiques du vehicule</h4></br>
 
 	<div class="form-group">
-      {{ form_label(form.dept, "Departement", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_label(form.dept, "Region / Departement", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
       {{ form_errors(form.dept) }}
       <div class="col-sm-3">
         {{ form_widget(form.dept, {'attr': {'class': 'form-control'}}) }}

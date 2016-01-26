@@ -36,16 +36,47 @@ class Statistique
      */
     private $mailsend = 0;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip", type="string", nullable=true)
+     */
+    private $ip;
 
     /**
-     * Get id
+     * @var \DateTime
      *
-     * @return integer
+     * @ORM\Column(name="lastconnect", type="datetime")
      */
-    public function getId()
+    private $lastconnect;
+    /**
+     * Constructor
+     */
+
+    /**
+     * Get lastconnect
+     *
+     * @return DateTime
+     */
+    public function getLastconnect()
     {
-        return $this->id;
+        return $this->lastconnect;
     }
+
+    /**
+     * Set lastconnect
+     *
+     * @param DateTime $lastconnect
+     *
+     * @return Statistique
+     */
+    public function setLastconnect($lastconnect)
+    {
+        $this->lastconnect = $lastconnect;
+
+        return $this;
+    }
+
 
     /**
      * Set visit
@@ -94,5 +125,53 @@ class Statistique
     {
         return $this->mailsend;
     }
+    /**
+     * Set Ip
+     *
+     * @param string $Ip
+     *
+     * @return Statistique
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get Ip
+     *
+     * @return string
+     */
+    public function getip()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * Set Id
+     *
+     * @param integer $Id
+     *
+     * @return Statistique
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get Id
+     *
+     * @return integer
+     */
+    public function getid()
+    {
+        return $this->id;
+    }
+    
 }
 

@@ -1,32 +1,37 @@
 {% trans_default_domain 'FOSUserBundle' %}
-<div class="jumbotron">
-      <h1 class="text-center">GOOD LOC VTC</h1>
+ <div id="header" class="jumbotron">
+      <h1 class="text-center">The GoOd LoC</h1>
+      <h2 class="text-center">location de vehicule apte a la profession de vtc</h2>
       <p class="text-center">
-        Ce site à pour but de faciliter la location de vehicule apte aux metiers de VTC.
-        <br />
+        Ce site à pour but de faciliter la mise en relation<br />
+        entre les chauffeurs professionnels et les loueurs de vehicule apte au transport de personne.
+      
       </p>
-  </div>
-  <div>
-      <p class="text-center">
+    </div>
+      <br />
+       <p class="text-center">
         <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
-        <a class="btn btn-primary btn-md" href="{{ path('fos_user_security_logout') }}">Deconnexion</a>
+{% if ( is_granted('ROLE_USER')) %}
+        <a class="btn btn-info btn-md" href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-log-out"></i> Deconnexion</a>
+{% else %}
+<a class="btn btn-info btn-md" href="{{ path('fos_user_security_login') }}"><i class="glyphicon glyphicon-log-in"></i> Connexion / Inscription</a>
+{% endif %}
 {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}">ADMIN</a>
+        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_admin') }}"> ADMIN</a>
       {% endif %}
 
-        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+        <a href="{{ path('vtc_platform_contact') }}" class="btn btn-primary">
       <i class="glyphicon glyphicon-envelope"></i> Nous contacter
     </a>
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_myaccount') }}">
+        <a class="btn btn-info btn-md" href="{{ path('vtc_platform_myaccount') }}">
           <i class="glyphicon glyphicon-home"></i> Mes annonces</a>
-        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
+        <a href="{{ path('vtc_platform_home') }}" class="btn btn-primary">
       <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
     </a>
-
     
       </p>
     </div>
-  </div></br >
+    </div></br >
   <div class="text-center">
 
 {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}

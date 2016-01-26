@@ -53,7 +53,9 @@
       <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer l'annonce</a>
 </div>
 </div>
+
   {% endfor %}
+  <h6><a href="{{ path('vtc_platform_deleteuser', {'id': user.id}) }}">Supprimer votre compte {{ user.username }} ?</a></h6>
 
 {% else %}
 <div class="well">

@@ -18,3 +18,7 @@ _main:
 oc_platform_translation:
     path:     /traduction/{name}
     defaults: { _controller: OCPlatformBundle:Advert:translation }
+
+_console:
+    resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"
+    prefix: /_console

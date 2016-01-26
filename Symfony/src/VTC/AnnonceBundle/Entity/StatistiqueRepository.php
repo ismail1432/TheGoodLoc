@@ -10,5 +10,31 @@ namespace VTC\AnnonceBundle\Entity;
  */
 class StatistiqueRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getIpvisitor($ip)
+	{
+		$qb = $this->createQueryBuilder('s')
+		->where('s.ip = :ip')
+		->setParameter('ip', $ip);
+    return $qb->getQuery()->getResult();
+	}
+
+	public function getVisitorsnumber()
+	{
+
+		$query = $this->_em->createQuery('SELECT SUM(s.visit) FROM VTCAnnonceBundle:Statistique s');
+		$count = $query->getSingleResult();
+
+		return $count;
 	
+	}
+
+	public function getMailsend()
+	{
+
+		$query = $this->_em->createQuery('SELECT SUM(s.mailsend) FROM VTCAnnonceBundle:Statistique s');
+		$count = $query->getSingleResult();
+
+		return $count;
+	
+	}
 }

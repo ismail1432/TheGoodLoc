@@ -1,6 +1,7 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
 <body>
   <div class="container">
     <div id="header" class="jumbotron">
@@ -10,7 +11,7 @@
         <br />
       </p>
     </div>
-{% block fos_user_content %}
+
  <p class="text-center">
         <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
 {% if ( is_granted('ROLE_USER')) %}
@@ -32,22 +33,18 @@
     </a>
     
       </p>
-    </div>
+    
 
     
       </p>
     </div>
   </div>
+
   <div class="text-center">
 <p>
 <div class="alert alert-info">
 {{ 'resetting.check_email'|trans({'%email%': email}) }}
 </p>
-</div>
-{% endblock %}
-      
-      
-      
     </div>
 
     <hr>
@@ -62,7 +59,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   {% endblock %}
-
+  </div>
+ </div>
 </body>
 </html>
-
+ {% endblock fos_user_content %}
