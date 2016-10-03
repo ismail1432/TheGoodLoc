@@ -29,7 +29,7 @@ class AdvertController extends Controller
   {
       $em = $this->getDoctrine()->getManager();
 
-      $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
+      $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp(); //retourne l'IP du client
      // $visitor = $em->getRepository('VTCAnnonceBundle:Statistique')->getIpvisitor($ip);
       $visitor = $em->getRepository('VTCAnnonceBundle:Statistique')->findOneByIp($ip);
 
@@ -41,14 +41,12 @@ class AdvertController extends Controller
       $lasttime = $visitor->getLastconnect();
 
       $lastdate = $lasttime->getTimestamp();
-      $datenow = strtotime("now" - "5 hours"); 
+      $datenow = strtotime("now" - "5 hours"); //si la connexion date de moins de 5 heure on ajoute une visiste
 
       if(($lastdate - $datenow) > 18000)
-      
-    {
+      {
        $this->container->get('vtc_platform.visit_stats')->addVisit($ip);
-       
-    }
+       }
    
     if ($page < 1) {
       // On déclenche une exception NotFoundHttpException, cela va afficher
@@ -57,9 +55,6 @@ class AdvertController extends Controller
     }
 
     $form = $this->createForm(new SearchType());
-
-    // Ici je fixe le nombre d'annonces par page à 3
-    // Mais bien sûr il faudrait utiliser un paramètre, et y accéder via $this->container->getParameter('nb_per_page')
     $nbPerPage = 3;
 
     // On récupère notre objet Paginator
@@ -93,7 +88,7 @@ class AdvertController extends Controller
 
   }
 
-  public function partagerAction( Request $request)
+  public function partagerAction( Request $request) //Partage d'une annonce
   {
     $em = $this->getDoctrine()->getManager();
     $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
@@ -139,7 +134,7 @@ class AdvertController extends Controller
   }
 
 
-  public function viewAction($id, Request $request)
+  public function viewAction($id, Request $request) //Annonce en detail
    {
     $em = $this->getDoctrine()->getManager();
     $ip = $this->container->get('request_stack')->getCurrentRequest()->getClientIp();
@@ -213,7 +208,7 @@ class AdvertController extends Controller
     ));   
   }
 
-  public function contactAction(Request $request)
+  public function contactAction(Request $request) //Contact l'auteur d'une Annonce
   {
 
         if($request->getMethod() == 'POST')
@@ -238,7 +233,7 @@ class AdvertController extends Controller
 
 
   }
-  public function accountAction(Request $request)
+  public function accountAction(Request $request) //retourne les annonces d'un User
   {
 
     if (!$this->get('security.context')->isGranted('ROLE_USER')) {
@@ -287,22 +282,13 @@ class AdvertController extends Controller
 
     if ($form->handleRequest($request)->isValid())
     {
-         // --- Dans le cas où vous avez un champ "articleCompetences" dans le formulaire - 1/2 ---
-        // Cette ligne est nécessaire pour qu'on puisse enregistrer en bdd en deux étapes :
-        // * D'abord l'article tout seul (c'est pour ça qu'on enlève les articleCompetences)
-        // * Puis les articleCompetences, juste après, car on a besoin de l'id de l'$article
-        //   Or cet id n'est attribué qu'au flush, car on utilise l'AUTOINCREMENT de MySQL !
         $advert->getImages()->clear();
         $advert->setUser($user);
-        // --- Fin du cas 1/2 ---
-        // On enregistre l'objet $article dans la base de données
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($advert);
         $em->flush();
-        // --- Dans le cas où vous avez un champ "articleCompetences" dans le formulaire - 2/2 ---
-        // Maintenant que l'artiche est enregistré et dispose d'un id,
-        // On parcourt les articleCompetences pour leur ajouter l'article et les persister manuellement
-        // (rappelez-vous, c'est articleCompetence la propriétaire dans sa relation avec Article !)
+       
         foreach ($form->get('images')->getData() as $adv) {
           $adv->setAdvert($advert);
           $em->persist($adv);
@@ -413,7 +399,6 @@ class AdvertController extends Controller
           $em->persist($adv);
         }
         $em->flush();
-      // Inutile de persister ici, Doctrine connait déjà notre annonce
     
 
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
@@ -423,7 +408,7 @@ class AdvertController extends Controller
 
     return $this->render('VTCAnnonceBundle:Advert:edit.html.twig', array(
       'form'   => $form->createView(),
-      'advert' => $advert // Je passe également l'annonce à la vue si jamais elle veut l'afficher
+      'advert' => $advert 
     ));
   }
   else {
@@ -434,7 +419,7 @@ class AdvertController extends Controller
   }
 }
 
-  public function mysearchAction(Request $request)
+  public function mysearchAction(Request $request) //barre de recherche selon critères
   {
     
     $form = $this->createForm(new SearchType());
@@ -471,11 +456,7 @@ class AdvertController extends Controller
 
         }
 
-        // À ce stade :
-
-        // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
-
-        // - Soit la requête est de type POST, mais le formulaire n'est pas valide, donc on l'affiche de nouveau
+       
 
         return $this->render('VTCAnnonceBundle:Advert:searchform.html.twig', array('form' => $form->createView()));
     
@@ -509,26 +490,19 @@ class AdvertController extends Controller
 
   }
 
-    public function deleteuserAction($id, Request $request)
+    public function deleteuserAction($id, Request $request) //efface un utilisateur
     {
 
     $user = $this->get('security.token_storage')->getToken()->getUser();
     $em = $this->getDoctrine()->getManager();
     
-    // On crée un formulaire vide, qui ne contiendra que le champ CSRF
-    // Cela permet de protéger la suppression d'annonce contre cette faille
+   
     $form = $this->createFormBuilder()->getForm();
 
      {
 
     if ($form->handleRequest($request)->isValid()) {
 
-    /*  foreach ($listadvertuser as $adv)
-       {
-          $em->remove($adv);
-          $em->flush();
-        }
-    */
       $em->remove($user);
       $em->flush();
       $request->getSession()->getFlashBag()->add('notice', "Votre compte a bien été supprimer.");

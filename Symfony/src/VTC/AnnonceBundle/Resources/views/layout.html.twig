@@ -1,4 +1,4 @@
-{# src/OC/PlatformBundle/Resources/views/layout.html.twig #}
+
 
 {% extends "::layout.html.twig" %}
 
@@ -8,7 +8,7 @@
 
 {% block body %}
 
-  {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+
   <p class="text-center">
         <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_add') }}"><i class="glyphicon glyphicon-pencil"></i> Ajouter une annonce</a>
 {% if ( is_granted('ROLE_USER')) %}
@@ -34,7 +34,7 @@
 
   <hr>
 
-  {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+  
   {% block ocplatform_body %}
   {% endblock %}
 
