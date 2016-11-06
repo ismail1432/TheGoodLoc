@@ -1,43 +1,27 @@
 
 {% extends "::layout.html.twig" %}
 
+{# src/VTC/PlatformBundle/Resources/views/Advert/add.html.twig #}
+
+
 
 {% block body %}
-
-  <p class="text-center">
-       
-{% if ( is_granted('ROLE_USER')) %}
-        <a class="btn btn-primary btn-md" href="{{ path('fos_user_security_logout') }}"><i class="glyphicon glyphicon-log-out"></i> Deconnexion</a>
-{% else %}
-<a class="btn btn-primary btn-md" href="{{ path('fos_user_security_login') }}"><i class="glyphicon glyphicon-log-in"></i> Connexion / Inscription</a>
-{% endif %}
-{% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_admin') }}"> ADMIN</a>
-      {% endif %}
-
-      	<a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
-      <i class="glyphicon glyphicon-envelope"></i> Nous contacter
-    </a>
-        <a class="btn btn-primary btn-md" href="{{ path('vtc_platform_myaccount') }}">
-        	<i class="glyphicon glyphicon-home"></i> Mes annonces</a>
-        <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
-      <i class="glyphicon glyphicon-chevron-left"></i> Retour à la liste
-    </a>
-    
-      </p>
-    </div>
-  <h2>Ajouter une annonce</h2>
+  <div class="container">
+    <div class="row">
+ {# On définit un sous-titre commun à toutes les pages du bundle, par exemple #}
+  <h2 class="center-align"><span style="color:#9ccc65;">|</span> Ajouter une annonce</h2>
 
 {% if ( is_granted('ROLE_USER')) %}
-<h4> Connecté en tant que {{ app.user.username }}</h4>
+<h6><i style="color:#9ccc65;" class="material-icons">announcement</i>  Vous êtes connecté en tant que {{ app.user.username }}</h6>
     </br>
     {% include "VTCAnnonceBundle:Advert:form.html.twig" %}
 
 {% endif %}
 
-  <p class="aler alert-danger">
-    Attention : En postant votre annonce vous acceptez les conditions generales du site.
+  <p class="center-align">
+    <i style="color:#9ccc65;" class="material-icons">announcement</i> Attention : En postant votre annonce vous acceptez les conditions generales du site.
   </p>
-
+</div>
+</div>
 {% endblock %}
 

@@ -1,4 +1,4 @@
-
+{# src/VTC/AnnonceBundle/Resources/views/Advert/index.html.twig #}
 
 {% extends "VTCAnnonceBundle::layout.html.twig" %}
 
@@ -8,83 +8,127 @@
 {% endblock %}
 {% block ocplatform_body %}
 
-<div class"row">
-<div id="search" class="col-md-12">
-  
+
  {{ render(controller("VTCAnnonceBundle:Advert:mysearch")) }}
 
-</div>
-</div>
 
-  <h2>{{total}} annonces </h2>
+<div class="container">
+  <h2 class="center-align"><span style="color:#9ccc65;">|</span> {{total}} annonces </h2>
+<div class="row">
+<div id="annonces" class="col s12 m8">
+  {% for advert in listAdverts %}
+<div id="announcesDetail" class="mythumb z-depth-5">
+ <ol><ul><a class="linkHoverTitle" href="{{ path('vtc_platform_view', {'id': advert.id}) }}"><h2 class="blue-grey-text"> {{ advert.title }} <i class="medium material-icons right">search</i></h2></a>
+  
+ {% if advert.modele  %}
+    
+  <h5>Modele : {{ advert.modele }} </h5>
 
-<div id="annonces" class="col-md-8">
-
-{% for advert in listAdverts %}
-
-  <div class="thumbnail">
-
-
-      <ol><ul><a href="{{ path('vtc_platform_view', {'id': advert.id}) }}"><h2>{{ advert.title }}</h2></a>                                               
- {% if advert.modele %}
-  <h4>Modele : {{ advert.modele }}</h4>
-    {% endif %}
+ {% endif %}
   {% if advert.categorie %}
-  <h5>Categorie : {{ advert.categorie }}</h5>
-    {% endif %}
+   
+ <h5>Categorie : {{ advert.categorie }} </h5>
+  
+ {% endif %}
   {% if advert.dept %}
-  <h5>Departement : {{ advert.dept }} </h5>
-    {% endif %}
+     
+ <h5>Departement : {{ advert.dept }} </h5>
+  
+ {% endif %}
   {% if advert.kilometres %}
-  <h5>Kilometres Vehicule : {{ advert.kilometres }}</h5>
-    {% endif %}
+   
+ <h5>Kilometres du Vehicule : {{ advert.kilometres }} kms </h5> 
+  
+ {% endif %}
   {% if advert.annee %}
-  <h5>Année : {{ advert.annee }}</h5>
+     
+  <h5>Annee : {{ advert.annee }}</h5>
+   
     {% endif %}
-
   {% if advert.pricejour %}
-  <h5>Prix : {{ advert.pricejour }}€ /jour </h5>
+     
+ <h5>Prix à la journée : {{ advert.pricejour }} € </h5>
+  
   {% endif %}
   {% if advert.pricehebdo %}
-  <h5>Prix : {{ advert.pricehebdo }}€ /semaine </h5>
+     
+ <h5>Prix à la semaine : {{ advert.pricehebdo }} € </h5>
+  
   {% endif %}
   {% if advert.pricemensuel %}
-  <h5>Prix : {{ advert.pricemensuel }}€ /mois </h5>
+     
+ <h5>Prix mensuel : {{ advert.pricemensuel }} € </h5>
+  
   {% endif %}
   {% if advert.doublage == true %}
-  Doublage possible  </br>
+  <h5>Doublage possible</h5>  </br>
   {% endif %}
-  annonce posté le {{ advert.date|date('d/m/Y') }}</br > </br > 
-  {% for img in advert.images|slice(0, 1) %}
- 
-       <img src="{{ img.webPath|imagine_filter('platform') }}"  alt="{{ img.alt }}"class="img-rounded"/>
-       {% endfor %}   
-</ul>
-</ol> 
+   
+ <h5>postée le {{ advert.date|date('d/m/Y') }} </h5>
 
+   {% for img in advert.images|slice(0, 1) %}
+ {#
+ {% if mobile %}
+  <img src="{{ img.webPath|imagine_filter('mobile')  }}" alt="{{ img.alt }}" class="img-rounded" ></a>
+{% else %}
+#}
+  <img src="{{ img.webPath|imagine_filter('platform')  }}" alt="{{ img.alt }}" class="img-responsive" ></a>
+   
+  {% endfor %}  
+  </ul>
+</ol>  
 </div>
   {% endfor %}
+  
+</div>
+
+  <div id="info" id="menu" class="col m4">
+
+       <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class=" card-title"><i class="center-align medium material-icons">info_outline</i></span>
+              <p>Vehicules de moins de 6 ans<br>
+                Berline et Vans uniquement<br>
+                Couleur sombre de preference
+              </p>
+            </div>
+            <div class="card-action">
+              <a href="{{ path('vtc_platform_add') }}"><i class="material-icons left">mode_edit</i> Ajouter une annonce</a>
+              
+            </div>
+          </div>
+  </div>
+  </div>
+  {% if nbPages != 0 %}
+  <div class="row">
   <div class="text-center">
   <ul class="pagination">
   {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
+
   {% for p in range(1, nbPages) %}
     <li{% if p == page %} class="active"{% endif %}>
       <a href="{{ path('vtc_platform_home', {'page': p}) }}">{{ p }}</a>
     </li>
   {% endfor %}
+
 </ul>
    </div>
    </div>
+   {% endif %}
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  <div id="menu" class="col-md-4">
+  ga('create', 'UA-78049638-2', 'auto');
+  ga('send', 'pageview');
 
-        <h3>Dernières annonces</h3>
-        {{ render(controller("VTCAnnonceBundle:Advert:menu")) }}
-  </div>
-
+</script>
 
 
 
+</div>
 {% endblock %}
 
 

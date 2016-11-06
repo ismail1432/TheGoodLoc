@@ -11,25 +11,25 @@
 
   <h2>Modifier une annonce</h2>
 
- 
+  {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
 <h3>Formulaire d'annonce</h3>
 
 <div class="well">
   {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-  
+    {# Les erreurs générales du formulaire. #}
     {{ form_errors(form) }}
 
     <div class="form-group">
-      
+      {# Génération du label. #}
       {{ form_label(form.title, "Titre de l'annonce", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
 
-
+      {# Affichage des erreurs pour ce champ précis. #}
       {{ form_errors(form.title) }}
      
       <div class="col-sm-4">
-        
+        {# Génération de l'input. #}
         {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
       </div>
     </div>
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-
+    {# Idem pour un autre champ. #}
     <div class="form-group">
       {{ form_label(form.categorie, "Categorie du Vehicule", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
       {{ form_errors(form.title) }}
@@ -184,10 +184,21 @@
       </div>
     </div>
 
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
 
+  {# Génération du label + error + widget pour un champ #}
+
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  
+
+  
+  
+  {# Le formulaire reste inchangé #}
+{# On charge la bibliothèque jQuery. Ici, je la prends depuis le CDN google
+   mais si vous l'avez en local, changez simplement l'adresse. #}
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-
+{# Voici le script en question : #}
 <script type="text/javascript">
   $(document).ready(function() {
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
@@ -219,7 +230,7 @@
       });
     }
 
-   
+    // La fonction qui ajoute un formulaire Categorie
     function addImage($container) {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
@@ -242,7 +253,7 @@
       index++;
     }
 
-    
+    // La fonction qui ajoute un lien de suppression d'une catégorie
     function addDeleteLink($prototype) {
       // Création du lien
       $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
@@ -262,7 +273,10 @@
    <div  class="text-center">
   {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
   </div>
-{{ form_rest(form) }}
+{{ form_rest(form) }}{# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {# Fermeture de la balise <form> du formulaire HTML #}
   {{ form_end(form) }}
 </div>
 </form>

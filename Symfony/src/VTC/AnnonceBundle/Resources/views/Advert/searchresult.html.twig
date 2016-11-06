@@ -1,4 +1,4 @@
-
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
 
 {% extends "VTCAnnonceBundle::layout.html.twig" %}
 
@@ -19,7 +19,7 @@
 
 <div id="annonces" class="col-md-8">
 
-{% for advert in listAdverts %}
+{% for advert in listAdv %}
 
   <div class="thumbnail">
 
@@ -53,27 +53,19 @@
   {% if advert.doublage == true %}
   Doublage possible  </br>
   {% endif %}
-  annonce posté le {{ advert.date|date('d/m/Y') }}</br > </br > 
+  annonce postée le {{ advert.date|date('d/m/Y') }}</br > </br > 
   {% for img in advert.images|slice(0, 1) %}
  
-       <img src="{{ img.webPath|imagine_filter('platform') }}"  alt="{{ img.alt }}"class="img-rounded"/>
+      
+  <img src="{{ img.webPath|imagine_filter('mobile')  }}" alt="{{ img.alt }}" class="img-rounded" ></a>
+
        {% endfor %}   
 </ul>
 </ol> 
 
 </div>
   {% endfor %}
-  <div class="text-center">
-  <ul class="pagination">
-  {# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #}
-  {% for p in range(1, nbPages) %}
-    <li{% if p == page %} class="active"{% endif %}>
-      <a href="{{ path('vtc_platform_home', {'page': p}) }}">{{ p }}</a>
-    </li>
-  {% endfor %}
-</ul>
-   </div>
-   </div>
+ 
 
    {% else %}
    <h2 class="text-center"> Desolé, il n'y a aucune annonce pour votre recherche</h2>

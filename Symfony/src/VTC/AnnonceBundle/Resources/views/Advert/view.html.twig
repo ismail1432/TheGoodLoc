@@ -1,136 +1,143 @@
 {% extends "VTCAnnonceBundle::layout.html.twig" %}
 
-{% block title %}
-  Lecture d'une annonce - {{ parent() }}
-{% endblock %}
+
 
 {% block ocplatform_body %}
-<div clas="text-center">
-<div class="well">
-<div class="alert alert-warning">
-    <h5>Mefiez-Vous des annonçes allechantes !<br /> nous ne sommes pas tenus responsable de la veracité des informations, 
-    nous faisons simplement de la mise en relation
-    </h5>
+
+
+<div class="container">
+<div class="viewAdvert">
+    <div class="myalert orange lighten-4">
+        <p class="brown-text">Mefiez-Vous des annonçes allechantes !<br />
+            Nous ne sommes pas tenus responsable de la veracité des informations, 
+            nous faisons simplement de la mise en relation
+        </p>
     </div>
-    {% if advert.title %}
-  <h2>{{ advert.title }}</h2>
+
+
+      <div class="row">
+      <div class="col-s12">
+        {% if advert.title %}
+          <h2 class="center-align blue-grey-text">{{ advert.title }}</h2>
+        {% endif %}
+          <h5 class="center-align blue-grey-text">Mis en ligne le {{ advert.date|date('d/m/Y') }}</h5>
+          <table class="table striped ">
+          <tbody>
+        {% if advert.modele  %}
+          <tr>
+          <td>Modele</td> <td> {{ advert.modele }}</td>
+          </tr>
+        {% endif %}
+  
+        {% if advert.dept %}
+        <tr>
+        <td>Departement</td> <td> {{ advert.dept }} </td>
+        </tr>
         {% endif %}
 
-  <div class="row">
-  <div class="col-md-6 col-sm-12">
-  <table class="table table-striped">
-  <tbody>
+        {% if advert.categorie %}
+        <tr>
+        <td>Categorie</td> <td>{{ advert.categorie }} </td>
+        </tr>
+        {% endif %}
 
-{% if advert.modele  %}
-    <tr>
-  <td><h5>Modele<h5/></td> <td><h4> {{ advert.modele }} </h4></td>
-    </tr>
+        {% if advert.kilometres %}
+        <tr>
+        <td>Kilometres du Vehicule<td>{{ advert.kilometres }} kms  </td>
+        </tr>
+        {% endif %}
+ 
+        {% if advert.energie %}
+         <tr>
+       <td>Energie</td> <td>{{ advert.energie }} </td>
+       {% endif %}
 
- {% endif %}
-  {% if advert.dept %}
-     <tr>
- <td><h5>Departement</h5></td> <td><h4> {{ advert.dept }} </h4></td>
-  </tr>
- {% endif %}
- {% if advert.categorie %}
-   <tr>
- <td><h5>Categorie</h5></td> <td><h4>{{ advert.categorie }} </h4></td>
-  </tr>
- {% endif %}
- {% if advert.kilometres %}
-   <tr>
- <td><h5>Kilometres du Vehicule</h5><td><h4>{{ advert.kilometres }} kms </h5> </td>
-  </tr>
- {% endif %}
- {% if advert.energie %}
-   <tr>
- <td><h5>Energie</h5></td> <td><h4>{{ advert.energie }} </h5></td>
- {% endif %}
+       {% if advert.boitevitesse %}
+         <tr>
+       <td>Boite de vitesse</td> <td>{{ advert.boitevitesse }} </td>
+        </tr>
+       {% endif %}
 
- {% if advert.boitevitesse %}
-   <tr>
- <td><h5>Boite de vitesse</h5></td> <td><h4>{{ advert.boitevitesse }} </h4></td>
-  </tr>
- {% endif %}
+       {% if advert.interieur %}
+         <tr>
+      <td> Interieur</td> <td> {{ advert.interieur }} </td>
+       </tr>
+       {% endif %}
 
- {% if advert.interieur %}
-   <tr>
-<td> <h5>Interieur</h5></td> <td><h4> {{ advert.interieur }} </h4></td>
- </tr>
- {% endif %}
+      {% if advert.pricejour %}
+         <tr>
+     <td>Prix à la journée</td> <td>{{ advert.pricejour }} € </td>
+      </tr>
+      {% endif %}
 
-  {% if advert.pricejour %}
-     <tr>
- <td><h5>Prix à la journée</h5></td> <td><h4>{{ advert.pricejour }} € </h4></td>
-  </tr>
-  {% endif %}
+      {% if advert.pricehebdo %}
+         <tr>
+     <td>Prix à la semaine</td> <td>{{ advert.pricehebdo }} € </td>
+      </tr>
+      {% endif %}
 
-  {% if advert.pricehebdo %}
-     <tr>
- <td><h5>Prix à la semaine</h5></td> <td><h4>{{ advert.pricehebdo }} € </h4></td>
-  </tr>
-  {% endif %}
-  {% if advert.pricemensuel %}
-     <tr>
- <td><h5>Prix mensuel</h5></td> <td><h4> {{ advert.pricemensuel }} € </h4></td>
-  </tr>
-  {% endif %}
-{% if advert.kilometremax %}
-   <tr>
- <td><h5>Kilometrage maximum /mois</h5></td> <td><h4>{{ advert. kilometremax }} kms </h4></td>
-  </tr>
-  {% endif %}
+      {% if advert.pricemensuel %}
+         <tr>
+     <td>Prix mensuel</td> <td> {{ advert.pricemensuel }} € </td>
+      </tr>
+      {% endif %}
 
-  {% if advert.doublage == true %}
-     <tr>
- <td><h5>Doublage possible</h5></td>
-  </tr>
-  {% endif %}
-  {% if advert.comments %}
-   <tr>
- <td><h5>Commentaires</h5> <h4> {{ advert.comments }}</h4></td>
-  </tr>
- {% endif %}
-   <tr>
- <td><h5>posté le {{ advert.date|date('d/m/Y') }} </h5></td>
-  </tr>
+    {% if advert.kilometremax %}
+       <tr>
+     <td>Kilometrage maximum /mois</td> <td>{{ advert. kilometremax }} kms </td>
+      </tr>
+      {% endif %}
 
-  </tbody>
-</table>
-</div>
-</div>
+      {% if advert.doublage == true %}
+         <tr>
+     <td>Doublage possible</td>
+      </tr>
+      {% endif %}
+    
+      </tbody>
+    </table>
+      {% if advert.comments %}
+       <tr>
+     <p class="commentAdvert">Commentaires : <br> {{ advert.comments }}</p>
+      </tr>
+     {% endif %}
 
-<div class="row">
-<div class="col-md-12 col-sm-12">
+  
   {% for img in advert.images %}
-<a href= "{{ img.webPath|imagine_filter('big')  }}" onclick="window.open(this.href, 'photo', 'height=500, width=550, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"><img src="{{ img.webPath|imagine_filter('view')  }}" alt="{{ img.alt }}"/></a>
-
-
-
+{#
+    {% if mobile %}
+  <img src="{{ img.webPath|imagine_filter('mobile')  }}" alt="{{ img.alt }}" class="img-rounded" ></a>
+{% else %}
+#}
+<a href= "{{ img.webPath }}" onclick="window.open(this.href, 'photo', 'height=500, width=550, top=100, left=100, toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=yes, status=no'); return false;"><img src="{{ img.webPath|imagine_filter('view')  }}" alt="{{ img.alt }}" class="img-rounded"/></a>
 
   {% endfor %} 
-</div>
-</div>
-</br ></br >
-  {% include "VTCAnnonceBundle:Advert:contactmail.html.twig" %}
-  </br >
-  {% include "VTCAnnonceBundle:Advert:partageannonce.html.twig" %}
-</br >
-<div>
+    </div>
+    <div>
   <p>
     <a href="{{ path('vtc_platform_home') }}" class="btn btn-info">
-      <i class="glyphicon glyphicon-chevron-left"></i>
+      <i class="material-icons left">reorder</i>
       Retour à la liste
     </a>
-    <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn btn-warning">
-      <i class="glyphicon glyphicon-edit"></i>
+    <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn orange lighten-1">
+      <i class="material-icons left">mode_edit</i>
       Modifier l'annonce
     </a>
-    <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
-      <i class="glyphicon glyphicon-trash"></i>
+    <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn red darken-2">
+      <i class="material-icons left">delete sweep</i>
       Supprimer l'annonce
     </a>
   </p>
+</div>
+    </div>
+</div>
+</div>
+
+  {% include "VTCAnnonceBundle:Advert:contactmail.html.twig" %}
+ 
+  {% include "VTCAnnonceBundle:Advert:partageannonce.html.twig" %}
+
+</div>
 </div>
 </div>
 {% endblock %}

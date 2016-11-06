@@ -1,56 +1,52 @@
-
-
-<h4>Envoyer un message pour cette annonce: </h4>
-  
- <form class="form-horizontal" action="{{ path('vtc_platform_view', {'id': advert.id}) }}" method="post">
-<div class="form-group">
-
-<div class="text-center">
-<div class="col-sm-6">
-  <div class="input-group">
-
-          <span class="input-group-addon">
-          <span class="glyphicon glyphicon-user"></span>
-          </span>
-          
-      <input type="text" class="form-control" placeholder="Votre nom"  name="name" id="name" maxlength="50" class="name" />
-          </div>
+<div class="container">
+<div class="row">
+<div class="col s12">
+<div class="contactAdvert">
+<h4 class="center-align">Envoyer un message pour cette annonce: </h4>
+<hr class="lime lighten-2">
+<form class="form-horizontal" action="{{ path('vtc_platform_view', {'id': advert.id}) }}" method="post">
+<div class="row">
+    <div class="input-field col s12 l8 offset-l2">
+          <i class="material-icons prefix">account_circle</i>
+          <label for="name"></label>
+          <input type="text" class="validate" placeholder="Votre nom"  name="name" id="name" maxlength="50" class="name" />
+    </div>
  </div>
-</div>
+
+<div class="row">
+    <div class="input-field col s12 l8 offset-l2">
+      <div class="input-group">
+        <i class="material-icons prefix">phone</i>
+          <label for="phone"></label>
+          <input type="tel" class="validate" placeholder="Votre telephone" name="phone" id="phone"  class="phone"/>
+      </div>
+      </div>
 </div>
 
-<div class="form-group">
-<div class="col-sm-6">
+<div class="row">
+<div class="input-field col s12 l8 offset-l2">
  <div class="input-group">
-<span class="input-group-addon">
- <span class="glyphicon glyphicon-phone"></span>
- </span>
- <input type="text" class="form-control" placeholder="Votre telephone" name="phone" id="phone"  class="phone"/>
+  <i class="material-icons prefix">mail</i>
+ <label for="mail"></label>
+   
+ <input type="text" class="validate" placeholder="Votre adresse email"  name="mail" id="mail" maxlength="80" class="mail" value="" required/>
 </div>
 </div>
 </div>
 
-<div class="form-group">
-<div class="col-sm-6">
- <div class="input-group">
-  <span class="input-group-addon">
- <span class="glyphicon glyphicon-envelope"></span>
-   </span>
- <input type="text" class="form-control" placeholder="Votre adresse email"  name="mail" id="mail" maxlength="80" class="mail" value="" required/>
-</div>
-</div>
-</div>
-
-<div class="form-group">
-<div class="col-sm-8">
+<div class="row">
+<div class="input-field col s12 l8 offset-l2">
 <div class="input-group">
-<span class="input-group-addon">
-<span class="glyphicon glyphicon-pencil"></span>
-</span>
-<textarea type="text" class="form-control" placeholder="Ecrivez votre message" name="msg" id="msg"  class="msg" value="" rows="6" required/></textarea>
+<i class="material-icons prefix">mode_edit</i>
+ <label for="msg"></label>
+<textarea type="text" class="materialize-textarea" placeholder="Ecrivez votre message" name="msg" id="msg"  class="msg" value="" rows="6" required/></textarea>
   </div>
+  <button type="submit" class="center-align btn lime lighten-2" name="validation"><i class="material-icons left">send</i>envoi</button>  
   </div>
 </div>
-<button type="submit" class="btn btn-primary btn-md" name="validation">envoi</button>
-                                   
+                            
 </form>
+</div>
+</div>
+</div>
+</div>

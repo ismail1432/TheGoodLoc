@@ -1,24 +1,31 @@
-
-
+<div class="container">
+<div class="row center-align">
+<div class="col s12">
+<div class="shareAdvert">
 <h4 class="section-heading">Partager l'annonce : </h4>
+<hr class="light-green">
   
  <form class="form-inline" action="{{ path('vtc_platform_view', {'id': advert.id}) }}" method="post">
-  <div class="form-group">
+  <div class="row">
+    <div class="input-field col s4">
+          <i class="material-icons prefix">account_circle</i>
+          <label for="name"></label>
+    <input type="text" class="validate" name="nom" id="nom"  placeholder="Votre nom">
+  </div>
+   <div class="input-field col s4">
     <div class="input-group">
-          <span class="input-group-addon">
-          <span class="glyphicon glyphicon-user"></span>
-          </span>
-    <input type="text" class="form-control" name="nom" id="nom"  placeholder="Votre nom">
+  <i class="material-icons prefix">mail</i>
+ <label for="mail"></label>
+         
+    <input type="email" class="validate" name="email" id="email" placeholder="Email du destinataire">
   </div>
-  <div class="form-group">
-   <div class="input-group">
-          <span class="input-group-addon">
-          <span class="glyphicon glyphicon-envelope"></span>
-          </span>
-    <input type="email" class="form-control" name="email" id="email" placeholder="Email du destinataire">
-  </div>
-  <button type="submit" class="btn btn-success btn-md" name="partage">envoyer l'annonce</button>
+</div>
+  <div class="input-field col s4">
+  <button type="submit" class="center-align btn light-green" name="validation"><i class="material-icons left">send</i>partage</button> 
+  </div> 
 </form>
+</div>
+</div>
 </div>
 </div>
 

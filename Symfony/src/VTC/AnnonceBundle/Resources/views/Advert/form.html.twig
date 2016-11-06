@@ -1,172 +1,144 @@
-
+{# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig 
+{% form_theme form 'VTCAnnonceBundle:Form:error.html.twig' %}
+#}
 
 <h3>Formulaire d'annonce</h3>
 <h5 class="alert alert-warning">Mettez le plus d'infos possible afin de ne pas être contacter inutilement</h5>
-<div class="well">
-  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-   
-    {{ form_errors(form) }}
-
-    <div class="form-group">
- 
-      {{ form_label(form.title, "Titre de l'annonce", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-
+  {{ form_start(form, {'attr': {'class': 'col s12'}}) }}
+  {{ form_errors(form) }}
      
-      {{ form_errors(form.title) }}
-     
-      <div class="col-sm-3">
-      
-        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
- <h4>Caracteristiques du vehicule</h4></br>
-
-	<div class="form-group">
-      {{ form_label(form.dept, "Region / Departement", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      {{ form_errors(form.dept) }}
-      <div class="col-sm-3">
-        {{ form_widget(form.dept, {'attr': {'class': 'form-control'}}) }}
-      </div>
+     <div class="row">
+        <div class="input-field col s12 m6">
+           {{ form_label(form.title, "Titre de l'annonce") }}
+            {{ form_widget(form.title, {'attr': {'class': 'validate'} }) }}
+            {{ form_errors(form.title) }}
+          </div>
     </div>
 
+ <h4 class="center-align blue-grey-text">Caracteristiques du vehicule</h4>
 
-    <div class="form-group">
-      {{ form_label(form.categorie, "Categorie du Vehicule", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      <div class="col-sm-3">
-        {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      {{ form_label(form.modele, "Modele / Nom du Vehicule", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      {{ form_errors(form.modele) }}
-      <div class="col-sm-3">
-        {{ form_widget(form.modele, {'attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
-    <div class="form-group">
-      {{ form_label(form.mois, "Date de mise en circulation", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+	<div class="row">
+  <div class="input-field col s12 m6">
+         {{ form_widget(form.dept) }}
+         {{ form_label(form.dept, "Region / Departement") }}
+  </div>
+  </div>
+  <div class="row">
+  <div class="input-field col s12 m6">
+         {{ form_widget(form.categorie)}}
+        {{ form_label(form.categorie, "Categorie du Vehicule") }}
+  </div>
+  </div>
+        <div class="row">
+        <div class="input-field col s12 m6">
+            {{ form_widget(form.modele, {'attr': {'class': 'validate', 'placeholder': "Modele / Nom du Véhicule"} }) }}
+            {{ form_errors(form.modele) }}
+          </div>
+          </div>
+     <div class="row">
+       <div class="input-field col s12 m6">
       {{ form_errors(form.mois) }}
-      <div class="col-sm-1">
+      
         {{ form_widget(form.mois,{'attr': {'class': 'form-control'}}) }}
-      </div>
-      <div class="col-sm-1">
+    
         {{ form_widget(form.annee, {'attr': {'class': 'form-control'}}) }}
-      </div>
+        {{ form_label(form.mois, "Date de mise en circulation") }}
+      
     </div>
+  </div>
     
 
-    <div class="form-group">
-      {{ form_label(form.energie, "Energie", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    <div class="row">
+      <div class=" col s12 m6">
+      {{ form_label(form.energie, "Energie") }}
       {{ form_errors(form.energie) }}
-      <div class="col-sm-4">
-        {{ form_widget(form.energie, {'test': {'class': 'form-control'}}) }}
-      </div>
+      {{ form_widget(form.energie, {'test': {'class': 'form-control'}}) }}
+     
     </div>
+      </div>
 
-    <div class="form-group">
-      {{ form_label(form.kilometres, "Kilometres du Vehicule", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    <div class="row">
+     <div class="col s12 m6">
+      {{ form_label(form.kilometres, "Kilometres du Vehicule") }}
       {{ form_errors(form.kilometres) }}
-      <div class="col-sm-2">
-        {{ form_widget(form.kilometres, {'attr': {'class': 'form-control'}}) }}
-      </div>
+      {{ form_widget(form.kilometres, {'attr': {'class': 'form-control'}}) }}
+    </div>
     </div>
 
-    <div class="form-group">
-      {{ form_label(form.boitevitesse, "Boîte de vitesse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      {{ form_errors(form.boitevitesse) }}
-      <div class="col-sm-4">
-        {{ form_widget(form.boitevitesse, {'test': {'class': 'form-control'}}) }}
-      </div>
+    <div class="row">
+    <div class="col s12 m6">
+        {{ form_label(form.boitevitesse, "Boîte de vitesse") }}
+        {{ form_errors(form.boitevitesse) }}
+        {{ form_widget(form.boitevitesse) }}
+    </div>
     </div>
 
-    <div class="form-group">
-      {{ form_label(form.assurance, "Assurance Transport de personne ?", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      {{ form_errors(form.assurance) }}
-      <div class="col-sm-2">
-        {{ form_widget(form.assurance, {'label_attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
 
     <div class="form-group">
-      {{ form_label(form.interieur, "Interieur Vehicule", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_label(form.interieur, "Interieur du Vehicule", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
       {{ form_errors(form.interieur) }}
       <div class="col-sm-4">
         {{ form_widget(form.interieur, {'label_attr': {'class': 'form-control'}}) }}
       </div>
     </div></br>
-<h4>Caracteristiques de la location</h4></br>
+<h4 class="center-align blue-grey-text">Caracteristiques de la location</h4>
 
-<div class="form-group">
-      {{ form_label(form.locjour, "Vehicule dispo à la journée ?", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      <div class="col-sm-1">
-        {{ form_widget(form.locjour, {'label_attr': {'class': 'form-control'}}) }}
-      </div>
-      {{ form_label(form.pricejour, "Si oui, indiquez le Prix à la journée", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+<div class="row">
+      <div class="col s12 m5">
+     
+      {{ form_label(form.pricejour, "Vehicule dispo à la journée ? Si OUI, INDIQUEZ LE PRIX A LA JOURNEE") }}
       {{ form_errors(form.pricejour) }}
       <div class="col-sm-1">
         {{ form_widget(form.pricejour, {'attr': {'class': 'form-control'}}) }}
       </div>
     </div>
+</div>
 
-    <div class="form-group">
-      {{ form_label(form.lochebdo, "Vehicule dispo à la semaine ?", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-
-      <div class="col-sm-1">
-        {{ form_widget(form.lochebdo, {'label_attr': {'class': 'form-control'}}) }}
-      </div>
-      {{ form_label(form.pricehebdo, "Si oui, indiquez le Prix à la semaine", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    <div class="row">
+      <div class="col s12 m5">
+      {{ form_label(form.pricehebdo, "Vehicule dispo à la semaine ? Si OUI, INDIQUEZ LE PRIX A LA SEMAINE") }}
       {{ form_errors(form.pricehebdo) }}
-      <div class="col-sm-1">
+
         {{ form_widget(form.pricehebdo, {'attr': {'class': 'form-control'}}) }}
       </div>
     </div>
 
-    <div class="form-group">
-      {{ form_label(form.locmensuel, "Vehicule dispo au mois ?", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    <div class="row">
+      <div class="col s12 m5">
+     
 
-      <div class="col-sm-1">
-        {{ form_widget(form.locmensuel, {'label_attr': {'class': 'form-control'}}) }}
-         {{ form_errors(form.locmensuel) }}
-      </div>
-      {{ form_label(form.pricemensuel, "Si oui, indiquez le Prix au mois", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_label(form.pricemensuel, "Vehicule dispo au mois ? Si OUI, INDIQUEZ LE PRIX AU MOIS", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
       {{ form_errors(form.pricemensuel) }}
-      <div class="col-sm-1">
-        {{ form_widget(form.pricemensuel, {'attr': {'class': 'form-control'}}) }}
+    
+      {{ form_widget(form.pricemensuel, {'attr': {'class': 'form-control'}}) }}
       </div>
     </div>
 
-    <div class="form-group">
-      {{ form_label(form.doublagebool, "Vehicule Disponible en Doublage ?", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-      {{ form_errors(form.doublagebool) }}
-      <div class="col-sm-4">
-        {{ form_widget(form.doublagebool, {'label_attr': {'class': 'form-control'}}) }}
-      </div>
-    </div>
-
-    <div class="form-group">
-      {{ form_label(form.kilometremax, "Kilometres Maximum", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    <div class="row">
+      <div class="input-field col s12 m5">
+      {{ form_label(form.kilometremax, "Kilometres Maximum au mois") }}
       {{ form_errors(form.kilometremax) }}
-      <div class="col-sm-2">
-        {{ form_widget(form.kilometremax, {'attr': {'class': 'form-control'}}) }}
+     
+      {{ form_widget(form.kilometremax) }}
       </div>
     </div>
 
-    <div class="form-group">
-      {{ form_label(form.comments, "Autres Infos", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+    <div class="row">
+      <div class="input-field col s12">
+      {{ form_label(form.comments, "Autres Infos") }}
       {{ form_errors(form.comments) }}
-      <div class="col-sm-4">
-        {{ form_widget(form.comments, {'attr': {'class': 'form-control'}}) }}
+  
+        {{ form_widget(form.comments, {'attr': {'class': 'materialize-textarea'}}) }}
       </div>
     </div>
 
-    <div class="form-group">
-      {{ form_label(form.images, "Enoyer Vos Photos (5 maximum) ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+    <div class="row">
+      <p>Envoyez vos photos (5 maximum)</p>
       {{ form_errors(form.images) }}
-      <div class="col-sm-4">
-        {{ form_widget(form.images, {'label_attr': {'class': 'form-control'}}) }}
-      </div>
+  
+        {{ form_widget(form.images) }}
     </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -174,11 +146,13 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+
+     $('select').material_select();
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
     var $container = $('div#vtc_annoncebundle_advert_images');
 
     // On ajoute un lien pour ajouter une nouvelle catégorie
-    var $addLink = $('<a href="#" id="add_image" class="btn btn-success">Ajouter une photo</a>');
+    var $addLink = $('<a href="#" id="add_image" class="btn blue-grey lighten-3"><i class="material-icons left">note add</i></a>');
     $container.append($addLink);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -203,7 +177,7 @@
       });
     }
 
-
+    // La fonction qui ajoute un formulaire Categorie
     function addImage($container) {
       // Dans le contenu de l'attribut « data-prototype », on remplace :
       // - le texte "__name__label__" qu'il contient par le label du champ
@@ -229,7 +203,8 @@
     // La fonction qui ajoute un lien de suppression d'une catégorie
     function addDeleteLink($prototype) {
       // Création du lien
-      $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+      $deleteLink = $('<a href="#" class="btn-floating light red"><i class="material-icons left">delete</i></a>');
+      
 
       // Ajout du lien
       $prototype.append($deleteLink);
@@ -241,12 +216,30 @@
         return false;
       });
     }
-  });
+  });         
 </script>
-   <div  class="text-center">
-  {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+   <div  class="center-align">
+  
+  {{ form_widget(form.save, {'attr': {'class': 'btn'}}) }}
+  
+  <div class="logo_load">
+  <img src="http://www.mediaforma.com/sdz/jquery/ajax-loader.gif">
+</div>
+
   </div>
-{{ form_rest(form) }}
+  <script type="text/javascript">
+  $('.logo_load').hide();
+  $(function (){
+  $("#vtc_annoncebundle_advert_save").click(function () {
+     $('.logo_load').show();
+  })
+});
+  </script>
+{{ form_rest(form) }}{# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {# Fermeture de la balise <form> du formulaire HTML #}
   {{ form_end(form) }}
+</div>
 </div>
 </form>

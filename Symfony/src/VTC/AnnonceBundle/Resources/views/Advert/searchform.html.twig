@@ -1,52 +1,55 @@
 {% block searchform %}
-<div class="well">
-<h4>Affiner Votre Recherche</h4></br>
+
+<div id="bandeau">
+  <div class="container">
+<div class="row">
+<h4 class="center-align"><span style="color:#9ccc65;">|</span> Affinez votre recherche</h4>
 <form action="{{ path('vtc_platform_searchresult') }}" method="post" {{ form_enctype(form) }} > 
 
 
-  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+  {{ form_start(form, {'attr': {'class': 'col s12 m10'}}) }}
 	<div class="form-group">
+       
+    
+        {{ form_widget(form.dept, {'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
+ 
       
       <div class="col-sm-2">
-        {{ form_widget(form.dept, {'attr': {'class': 'form-control'}}) }}
-      </div>
-      
-      <div class="col-sm-2">
-        {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.categorie, {'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
       </div>
       <div>
-      {{ form_label(form.annee, "Annee min", {'label_attr': {'class': 'col-sm-1 control-label'}}) }}
+      {{ form_label(form.annee, "Annee min", {'label_attr': {'class': 'right-align anneeMinForm browser-default input-field col s12 m3'}}) }}
     </div>
       <div class="col-sm-2">
-        {{ form_widget(form.annee,{'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.annee,{'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
       </div>
 
 
       
       <div class="col-sm-2">
-        {{ form_widget(form.kmsmin,{'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.kmsmin,{'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
         
       </div>
      
       
       <div class="col-sm-2">
-        {{ form_widget(form.kmsmax,{'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.kmsmax,{'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
       </div>
 </div>
 
     <div class="form-group">
 
       <div class="col-sm-2">
-        {{ form_widget(form.energie, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.energie, {'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
       </div>
       <div class="col-sm-2">
-        {{ form_widget(form.boitevitesse, {'attr': {'class': 'form-control'}}) }}
+        {{ form_widget(form.boitevitesse, {'attr': {'class': 'browser-default input-field col s12 m3'}}) }}
       </div>
  
   </div>
+</div>
 
-
-    
+   {#
 
 <div class="form-group">
  <div class="row">
@@ -59,32 +62,33 @@
     
       {{ form_label(form.locjour, "Vehicule dispo à la journée ?") }}
       {{ form_errors(form.locjour) }}
-      {{ form_widget(form.locjour) }}
+      {{ form_widget(form.locjour, {'attr': {'class': 'browser-default'}}) }}
   </span>
   <span class="lochebdo">
       {{ form_label(form.lochebdo, "Vehicule dispo à la semaine ?") }}
       {{ form_errors(form.lochebdo) }}
-      {{ form_widget(form.lochebdo) }}
+      {{ form_widget(form.lochebdo, {'attr': {'class': 'browser-default'}}) }}
   </span>
   <span class="lochebdo">
       {{ form_label(form.locmensuel, "Vehicule dispo au mois ?") }}
       {{ form_errors(form.locmensuel) }}
-      {{ form_widget(form.locmensuel) }}
+      {{ form_widget(form.locmensuel, {'attr': {'class': 'browser-default'}}) }}
   </span>
   <span class="lochebdo">
       {{ form_label(form.doublagebool, "Vehicule dispo en doublage ?") }}
       {{ form_errors(form.doublagebool) }}
-      {{ form_widget(form.doublagebool) }}
+      {{ form_widget(form.doublagebool, {'attr': {'class': 'browser-default'}}) }}
   </span>
   </div>
 
-      
+     #}  
   
-    <div  class="text-center">
+    <div  class="center-align">
 
-  {{ form_widget(form.Chercher, {'attr': {'class': 'btn btn-primary'}}) }}</i>
+  {{ form_widget(form.Chercher, {'attr': {'class': 'light-green lighten-1 waves-effect waves-light btn'}}) }}
   </div>
   {{ form_end(form) }}
 </form>
   </div>
+</div>
 {% endblock %}

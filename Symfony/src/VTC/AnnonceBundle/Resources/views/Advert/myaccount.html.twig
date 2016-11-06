@@ -1,4 +1,4 @@
-
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
 
 {% extends "VTCAnnonceBundle::layout.html.twig" %}
 
@@ -10,12 +10,13 @@
 
 </div>
 {% if advert %}
-  
+<div class="container center-align ">
+ <div class="row"> 
   <h2>Vos annonces</h2>
-<div class="row">
-<div id="annonces" class="col-md-10">
+
+<div id="annonces " class="col s12">
   {% for advert in advert %}
-<div class="well">
+<div class="viewAdvert">
 
 <div>
 
@@ -49,8 +50,12 @@
 </div>
 
 <div></br>
-       <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn btn btn-warning"><i class="glyphicon glyphicon-edit"></i> Modifier l'annonce</a>
-      <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer l'annonce</a>
+       <a href="{{ path('vtc_platform_edit', {'id': advert.id}) }}" class="btn orange lighten-1">
+      <i class="material-icons left">mode_edit</i>
+      Modifier l'annonce
+    </a>
+      <a href="{{ path('vtc_platform_delete', {'id': advert.id}) }}" class="btn red darken-2">
+      <i class="material-icons left">delete</i>Supprimer l'annonce</a>
 </div>
 </div>
 
