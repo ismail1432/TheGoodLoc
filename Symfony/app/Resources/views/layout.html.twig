@@ -1,5 +1,3 @@
-{# app/Resources/views/layout.html.twig #}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,31 +7,54 @@
   <title>{% block title %}Location Vehicule VTC{% endblock %}</title>
 
   {% block stylesheets %}
-    {# On charge le CSS de bootstrap depuis le site directement #}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+ 
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Varela+Round|Itim|Indie+Flower|Slabo+27px" rel="stylesheet">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+     <link rel="stylesheet" href="{{ asset('bundles/vtcannoncebundle/css/layout.css') }}" type="text/css" />
     <style type="text/css">
-  .lochebdo {
-    margin-left: 30px;
-      }
-  .nrj{
-    margin-bottom: 155px;
-  }
-  
+
 
   </style>
   {% endblock %}
 </head>
 
 <body>
-  <div class="container">
-    <div id="header" class="jumbotron">
-      <h1 class="text-center">The GoOd LoC</h1>
-      <h2 class="text-center">location de vehicule apte a la profession de vtc</h2>
+ 
+    <div id="header">
+      <div class="center-align">
+      <h1 class="z-depth-5 text-center">The GoOd</span> LoC</h1>
+      <h2 class="text-center">Locations de véhicules aptes à la profession de vtc</h2>
       <p class="text-center">
-        Ce site à pour but de faciliter la mise en relation<br />
-        entre les chauffeurs professionnels et les loueurs de vehicule apte au transport de personne.
-        <br />
-      </p>
+        Ce site à pour but de faciliter la mise en relation<br>
+        entre les chauffeurs professionnels et les loueurs de véhicules aptes au transport privé de personnes.
+      
+      </p> 
+      </div>
+      <div class="buttonBar center-align col l12" >
+     
+         <a class="light-blue darken-3 waves-effect waves-light btn" href="{{ path('vtc_platform_add') }}"><i class="material-icons left">mode_edit</i> Ajouter une annonce</a>
+{% if ( is_granted('ROLE_USER')) %}
+        <a class="waves-effect waves-light btn" href="{{ path('fos_user_security_logout') }}"><i class="material-icons left">input</i> Deconnexion</a>
+{% else %}
+      <a class="waves-effect waves-light btn" href="{{ path('fos_user_security_login') }}"><i class="material-icons left">input</i> Connexion / Inscription</a>
+{% endif %}
+{% if is_granted('ROLE_ADMIN') %}
+        <a class="waves-effect waves-light btn" href="{{ path('vtc_platform_admin') }}"> ADMIN</a>
+      {% endif %}
+        <a href="{{ path('vtc_platform_contact') }}" class="light-blue darken-3 waves-effect waves-light btn">
+      <i class="material-icons left">email</i> Nous contacter
+    </a>{% if ( is_granted('ROLE_USER')) %}
+        <a class="waves-effect waves-light btn" href="{{ path('vtc_platform_myaccount') }}">
+          <i class="material-icons left">person_pin</i> Mes annonces</a>
+         {% endif %} 
+         <a href="{{ path('vtc_platform_home') }}" class="pink lighten-2 waves-effect waves-light btn">
+      <i class="material-icons left">reorder</i> Retour à la liste
+    </a>
+    
+</div>
+ 
       
     </div>
 {% for flash_message in app.session.flashbag.get('notice') %}
@@ -41,27 +62,46 @@
         {{ flash_message }}
     </div>
 {% endfor %}
-    <div class="row">
+
+  
       
-      <div id="content" class="col-md-12">
+      <div id="content">
       
         {% block body %}
         {% endblock %}
       </div>
       
-    </div>
+    <footer class="page-footer blue-grey darken-1">
+          <div class="container">
+            <div class="white-text row">
+              <div class="col l6 s12">
+                <h5>The Good Loc</h5>
+                <p class="grey-text text-lighten-4">Developed With  <i class="fa fa-heart" aria-hidden="true"></i> By  <a href="www.smaine.me"><span class="eniams"> Eniams Dev</span></a> </p>
+                <p>Tout droits reservés © {{ 'now'|date('Y') }} Drive Safe.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Liens Utiles</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="{{ path('vtc_platform_add') }}"> Ajouter une annonce</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{ path('fos_user_security_login') }}"> Connexion / Inscription</a></li>
+                  <li><a class="grey-text text-lighten-3" href="{{ path('vtc_platform_contact') }}"> Nous contacter</a></li>
+                  <li><a class="grey-text text-lighten-3" href="contact@smaine.me">Le Developpeur</a></li>
+                </ul>
+              </div>
+            </div>
+            
+          </div>
+        </footer>
 
-    <hr>
+      
 
-    <footer>
-      <p>Tout droits reservés © {{ 'now'|date('Y') }} Drive Safe.</p>
-    </footer>
   </div>
 
   {% block javascripts %}
-    {# Ajoutez ces lignes JavaScript si vous comptez vous servir des fonctionnalités du bootstrap Twitter #}
+  
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+          
   {% endblock %}
 
 </body>
